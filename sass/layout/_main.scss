@@ -1,0 +1,77 @@
+@import "../utilities/mediaQueries";
+
+/* INFO UTIL INDEX*/
+
+.anchoInfo {
+    margin-top: 10rem;
+    .cardsInfo {
+        gap: 5rem;
+        .cardInfo {
+            border: none;
+            background-color: transparent;
+        }
+    }
+}
+
+/* NOSOTROS */
+
+.mt {
+    margin-top: 8rem;
+}
+
+.cardsEquipo {
+    gap: 8rem;
+    .cardEquipo {
+        border: none;
+        .imgEquipo {
+            border-radius: 19px;
+        }
+    }
+}
+
+/* CONTACTO */
+
+.contacto {
+    height: 70rem;
+    .form-label {
+        font-size: 1.5rem;
+    }
+    .form-control {
+        font-size: 1.2rem; 
+    }
+    .form-select {
+        font-size: 1.2rem;
+    }
+    .form-check-input {
+        width: 1.3rem;
+        height: 1.3rem;
+        margin-right: 1rem;
+    }
+    .form-check-label {
+        font-size: 1.5rem;
+    }
+    .botonForm {
+        background-color: #F97C7C;
+        border-radius: 44px;
+        color: white;
+    }
+    .btn-lg {
+        font-size: 1.5rem;
+    }
+}
+
+/* 404 */
+
+.hgt404 {
+    @include mobile {
+        height: 32rem;
+    }
+}
+
+.boton404 {
+    background-color: #F97C7C;
+    border-radius: 44px;
+    color: white;
+    font-size: 1.5rem;
+    width: 18rem;
+}

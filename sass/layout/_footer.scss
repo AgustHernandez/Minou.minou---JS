@@ -1,0 +1,30 @@
+.piePag {
+    background-image: linear-gradient(to right, #BF846F, #8C5346);
+    .row {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .navbar {
+        .navbar-nav {
+            .nav-item {
+            padding-right: 0;
+                &:hover {
+                    transform: scale(1.1);
+                }
+                a:hover {
+                    text-decoration: overline solid #EAE6DA;
+                    transform: scale(1,1);
+                }
+            }
+        }
+        a {
+            font-weight: 400;
+            font-size: 1.8rem;
+        }
+    }
+    .contRedes {
+        gap: 2rem;
+        background-color: transparent;
+        border: none;
+    }
+}

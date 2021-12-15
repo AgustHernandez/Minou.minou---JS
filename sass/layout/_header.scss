@@ -1,0 +1,52 @@
+@import "../utilities/mediaQueries";
+
+/* MENU */
+.container-lg {
+    @include mobile {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.navbarFondo {
+    background-image: linear-gradient(to right, #BF846F, #8C5346);
+    padding: 1.5rem;
+}
+.navbar {
+    .navbar-brand {
+        font-weight: 400;   
+        font-size: 3rem;
+    }
+    .navbar-nav {
+        .nav-item {
+        padding-right: 1rem;
+            &:hover {
+                transform: scale(1.1);
+            }
+            a:hover {
+                text-decoration: overline solid #EAE6DA;
+                transform: scale(1,1);
+            }
+        }
+    }
+    a {
+        font-weight: 400;
+        font-size: 1.8rem;
+    }
+}
+
+.hght {
+    @include mobile {
+        height: 20rem;
+    }
+    @include tablet {
+        height: 35rem;
+    }
+    @include desktop {
+        height: 50rem;
+    }
+}
+
+.badge {
+    font-size: 1rem;
+    border-radius: 1rem;
+}

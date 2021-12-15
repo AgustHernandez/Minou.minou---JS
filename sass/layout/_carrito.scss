@@ -1,0 +1,184 @@
+@import "../utilities/mediaQueries";
+
+.carrito {
+    @include tablet {
+        height: 50rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    @include desktop {
+        height: 110rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .col-lg-4 {
+        @include desktop {
+            width: 45rem;
+        }
+    }
+
+    .divVaciarCarrito {
+        width: 1500px;
+        display: flex;
+        justify-content: end;
+        align-items:flex-end;
+    }
+        .btnVaciarCarrito {
+            width: 110px;
+            background-color: #73403C;
+            border-radius: 44px;
+            color: white;
+            font-size: 1.5rem;
+        }
+    .tablaCarrito {
+        height: auto;
+        .table {
+            margin-bottom: 0;
+            border: 0 solid transparent;
+            .thead {
+                font-size: 1.5rem;
+                font-weight: 600;
+                letter-spacing: 1.4;
+                line-height: 30px;
+                .tableProduct {
+                    text-align: start;
+                    width: auto;
+                }
+            }
+            .tableImg {
+                width: 50px;
+                padding: 15px 10px 15px 5px;
+                .imgCarrito {
+                    width: 12rem;
+                    height: 12rem;
+                    border-radius: 19px;
+                }
+            }
+            .tableDetalle {
+                font-size: 1.2rem;
+                width: 115px;
+                vertical-align: middle;
+                letter-spacing: 2;
+                padding: 15px 10px 15px 5px;
+            }
+            .tableCantidad {
+                padding: 15px 5px 15px 5px;
+                vertical-align: middle;
+                font-size: 1.2rem;
+            }
+            .tablePrecio {
+                padding: 15px 5px 15px 5px;
+                vertical-align: middle;
+                font-size: 1.2rem;
+            }
+            .tableSubtotal {
+                vertical-align: middle;
+                font-size: 1.2rem;
+                padding: 15px 5px 15px 5px;
+            }
+            .tableTrash {
+                vertical-align: middle;
+                width: 50px;
+                padding: 15px 5px 15px 10px;
+                .buttonTrash {
+                    border: 0;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+    /*.prodCarrito {
+        @include desktop {
+            height: 320px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }*/
+
+    .articleEnvio {
+        height: 190px;
+        justify-content: start;
+        align-content: center;
+    }
+
+    .imgCamion {
+        width: 40px;
+    }
+    .textDomicilio {
+        vertical-align: auto;
+    }
+
+    .envios {
+        height: 120px;
+        width: 350px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 20px;
+        .listEnvios {
+            margin-right: 0px;
+            margin: 10px 0px 10px 0px;
+            .form-check-input {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            .form-check-label {
+                width: 180px;
+                padding-left: 10px;
+            }
+            .precioEnvio {
+                width: 80px;
+                font-weight: 700;
+                left: 260px;
+                top: 5px;
+                .textPrecio {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+    }
+    .containerTotal {
+        width: 1020px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items:flex-end;
+    }
+    .textTotal {
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        .total {
+            font-size: 2rem;
+            font-weight: 700;
+            padding-right: 20px;
+        }
+    }
+    .containerBtnCarrito {
+        width: 1200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items:flex-end;
+        .btnCarrito {
+            width: 100px;
+            background-color: #F97C7C;
+            border-radius: 44px;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 1s;
+            @include tablet {
+                width: 30rem;
+            }
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+    .linkBoton {
+        text-decoration: none;
+        color: white;
+        font-size: 1.5rem;
+    }
+}
