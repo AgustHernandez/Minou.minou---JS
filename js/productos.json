@@ -1,0 +1,83 @@
+[
+    {
+        "code": "0000001",
+        "nombre": "Taza de Ceramica",
+        "precio": 900,
+        "stock": 5,
+        "IVA": 0.21,
+        "img": "taza.jpg",
+        "nombreHTML": "producto1"
+    },
+    {
+        "code": "0000002",
+        "nombre": "Macetero Vertical",
+        "precio": 1500,
+        "stock": 4,
+        "IVA": 0.21,
+        "img": "macetero.jpg",
+        "nombreHTML": "producto2"
+    },
+    {
+        "code": "0000003",
+        "nombre": "Cesto para Guardado",
+        "precio": 1200,
+        "stock": 2,
+        "IVA": 0.21,
+        "img": "cestoJuguetes.jpg",
+        "nombreHTML": "producto3"
+    },
+    {
+        "code": "0000004",
+        "nombre": "Buzo para mascotas",
+        "precio": 1000,
+        "stock": 8,
+        "IVA": 0.21,
+        "img": "buzoMascota.jpg",
+        "nombreHTML": "producto4"
+    },
+    {
+        "code": "0000005",
+        "nombre": "Cama para mascotas",
+        "precio": 1900,
+        "stock": 3,
+        "IVA": 0.21,
+        "img": "camaMascotas.jpg",
+        "nombreHTML": "producto5"
+    },
+    {
+        "code": "0000006",
+        "nombre": "Camino para cama",
+        "precio": 900,
+        "stock": 5,
+        "IVA": 0.21,
+        "img": "caminoCama.jpg",
+        "nombreHTML": "producto6"
+    },
+    {
+        "code": "0000007",
+        "nombre": "Carameleros",
+        "precio": 900,
+        "stock": 10,
+        "IVA": 0.21,
+        "img": "carameleros.jpg",
+        "nombreHTML": "producto7"
+    },
+    {
+        "code": "0000008",
+        "nombre": "Maceta de Ceramica",
+        "precio": 1200,
+        "stock": 6,
+        "IVA": 0.21,
+        "img": "maceta.jpg",
+        "nombreHTML": "producto8"
+    },
+    {
+        "code": "0000009",
+        "nombre": "Maceta Autoriego",
+        "precio": 700,
+        "stock": 9,
+        "IVA": 0.21,
+        "img": "macetaAutoriego.jpg",
+        "nombreHTML": "producto9"
+    }
+]
