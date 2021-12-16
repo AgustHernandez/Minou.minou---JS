@@ -1,8 +1,13 @@
-let inventario = obtenerInventario()
+/*let inventario = obtenerInventario()
 let carritoCompra = new Carrito()
 carritoCompra.obtenerDeStorage()
 
+let articleProductos = document.getElementById("articleProductos")*/
 
+localStorage.setItem('carrito', JSON.stringify([]))
+
+
+/*
 $(() => {
     imprimirProductosIndex(0, 6)
 
@@ -104,7 +109,7 @@ $(() => {
     badgeCarrito()
 })
 
-/* INDEX */
+/* INDEX 
 
 function imprimirProductosIndex(desde, hasta) {
     inventario.slice(desde, hasta).forEach((producto, indice) => {
@@ -126,7 +131,7 @@ function imprimirProductosIndex(desde, hasta) {
     })
 }
 
-/* SECCIÓN PRODUCTOS */
+/* SECCIÓN PRODUCTOS 
 
 function limpiarProductos() {
     $("#sectionProductos").text("")
@@ -153,7 +158,7 @@ function imprimirProductos(desde, hasta) {
 }
 
 
-/* SECCIÓN PRODUCTO */
+/* SECCIÓN PRODUCTO 
 
 function breadcrumbProd(producto) {
     $("#navProducto").append(`
@@ -242,7 +247,7 @@ function imprimirProducto(producto) {
 }
 
 
-/* CARRITO */
+/* CARRITO 
 
 function badgeCarrito () {
     let cantProdCarrito = carritoCompra.productos.length
