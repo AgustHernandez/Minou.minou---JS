@@ -107,6 +107,7 @@ body {
   margin-left: .5rem; }
 
 .cardsProductos {
+  height: auto;
   gap: 8rem; }
   .cardsProductos .cardProducto {
     padding: 0rem;
@@ -264,12 +265,12 @@ body {
   justify-content: end;
   align-items: flex-end; }
 
-#producto3 {
-  display: none; }
-
+/*#producto3 {
+    display: none;
+}
 #producto4 {
-  display: none; }
-
+    display: none;
+}*/
 .divSwitchDolar {
   width: 1500px;
   display: flex;

@@ -5,8 +5,9 @@ class Producto {
         this.precio = parseInt(precio);
         this.stock = stock;
         this.IVA = 0.21;
-        this.nombreImg = nombreImg
-        this.nombreHTML = nombreHTML
+        this.img = nombreImg;
+        this.nombreHTML = nombreHTML;
+        this.cant = 1
     }
 
     valorIVA(){
@@ -23,3 +24,5 @@ class Producto {
         this.stock += cantVendida
     }
 }
+
+let productos = []
