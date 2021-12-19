@@ -1,4 +1,4 @@
-function imprimirProducto(producto) {
+/*function imprimirProducto(producto) {
     if (pagProducto != null) {
         pagProducto.innerHTML +=`
             <article class="col-lg-4 col-md-6 col-sm-4" id="producto${indice}">
@@ -70,7 +70,7 @@ function imprimirProducto(producto) {
                 </article>
             </article>
     `}
-}
+}*/
 
 function compraTotal(productosStorage) {
     acumulador = 0;
