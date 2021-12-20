@@ -23,6 +23,18 @@ class Producto {
     actualizarStock(cantVendida) {
         this.stock += cantVendida
     }
+    obtenerDeStorage() {
+        let index = 0;
+        let obj = JSON.parse(localStorage.getItem("carrito"))
+        if(obj != null) {
+            while(index < obj.length) {
+                this.productos.push(new Producto(obj[index].code,obj[index].nombre,obj[index].precio,obj[index].stock,obj[index].nombreImg,obj[index].nombreHTML));
+                
+                index++
+            }
+        }
+    }
 }
 
 let productos = []
+

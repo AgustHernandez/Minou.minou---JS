@@ -21,18 +21,24 @@ class Carrito {
         let productosCarrito = ""
         for (let prod of this.productos) {
             productosCarrito += `
-                <article class="col-lg-2 col-md-4 col-sm-4 col-8 cardsProductos">
-                    <div class="card text-center bg-transparent cardCarrito">
-                        <div class="card">
-                            <a href="../vistas/producto.html?id=${prod.code}" id="elegirProducto"><img class="card-img-top cardImgBorder" src="../assets/${prod.nombreImg}.jpg" alt="${prod.nombre}"></a>
+            <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="../assets/${prod.img}" class="img-fluid rounded-start" alt="${prod.nombre}">
                         </div>
-                        <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
-                            <h4 class="card-title fs-3">${prod.nombre}</h4>
-                            <p class="card-text fs-4">$ ${prod.precio}</p>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">${prod.nombre}</h5>
+                                <p class="card-text">$ ${prod.precio}</p>
+                                <p class="card-text">Cantidad: ${prod.cant}</p>
+                            </div>
                         </div>
                     </div>
-                </article>
-            `
+                    <div class="trashCarrito">
+                        <i class="far fa-trash-alt fa-3x"></i>
+                    </div>
+                </div>
+        `
         }
         return productosCarrito
     }
@@ -42,7 +48,7 @@ class Carrito {
         let obj = JSON.parse(localStorage.getItem("carrito"))
         if(obj != null) {
             while(index < obj.length) {
-                this.productos.push(new Producto(obj[index].code,obj[index].nombre,obj[index].precio,obj[index].stock,obj[index].nombreImg,obj[index].nombreHTML));
+                this.productos.push(new Producto(obj[index].code,obj[index].nombre,obj[index].precio,obj[index].stock,obj[index].img,obj[index].nombreHTML));
                 
                 index++
             }

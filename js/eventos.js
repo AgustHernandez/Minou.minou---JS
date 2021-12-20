@@ -1,15 +1,10 @@
 function imprimirProducto(producto) {
     if (pagProducto != null) {
         pagProducto.innerHTML +=`
-            <article class="col-lg-4 col-md-6 col-sm-4" id="producto${indice}">
+            <article class="col-lg-4 col-md-6 col-sm-4" id="producto${producto.code}">
                 <div class="position-relative hiddenProduct">
                     <div>
                         <img src="../assets/${producto.img}" class="d-block w-100 border-img position-relative imgProducto" alt="${producto.nombre}">
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="textProducto">
-                        <h5 class="display-5">${producto.nombre}</h5>
                     </div>
                 </div>
             </article>
@@ -40,14 +35,10 @@ function imprimirProducto(producto) {
                             <p class="fs-1 wdth text-center lh-base" id="precioProducto">$ ${producto.precio}</p>
                         </div>
                         <div class="d-inline-flex p-3 justify-content-center align-items-center w-100 gx mt-3">
-                            <button type="button" class="btn btnProducto btn-lg" id= "boton${indice}">Agregar al carrito.</button>
-                            <p>Se ha agregado el producto al carrito. <br>
-                                <a data-bs-toggle="modal" data-bs-target="#idModal">VER CARRITO</a>
-                            </p>
+                            <button type="button" class="btn btnProducto btn-lg" id= "boton${producto.code}">Agregar al carrito.</button>
                         </div>
-                        <div id="productoAgregado">
-                            <p class="fs-4 hidden"> Se ha agregado tu producto al carrito </p>
-                        </div>
+                    </form>
+                </div>
                     </form>
                 </div>
                 <div class="d-inline-flex p-3 justify-content-center align-items-center w-100 gx-5">
@@ -69,8 +60,54 @@ function imprimirProducto(producto) {
                     </div>
                 </article>
             </article>
-    `}
+    `
+    document.getElementById("cantidad").addEventListener('change', () => {
+        let nombreProducto = producto.nombre
+        let precio = producto.precio
+        let cantidad = parseInt(document.getElementById("cantidad").value)
+        let valor = cantidad * precio
+        document.getElementById("precioProducto").innerText ="$ " + valor
+    })
+
+    document.getElementById("btnPesos").addEventListener('click', () => {
+        let nombreProducto = producto.nombre
+        let precio = producto.precio
+        let cantidad = parseInt(document.getElementById("cantidad").value)
+        let valor = cantidad * precio
+        document.getElementById("precioProducto").innerText ="$ " + valor
+    
+    })    
+    
+    document.getElementById("btnDolar").addEventListener('click', () => {
+        fetch(URLGET)
+        .then((resp) => resp.json())
+        .then(function(data) {
+            let cotizacion = parseFloat(data[0].casa.venta)
+            let nombreProducto = producto.nombre
+            let precio = producto.precio
+            let cantidad = parseInt(document.getElementById("cantidad").value)
+            document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion).toFixed(2)
+        })
+        
+        /*$.get(URLGET, function (respuesta, estado) {
+            if(estado === "success"){
+                let cotizacion = parseFloat(respuesta[0].casa.venta)
+                let nombreProducto = producto.nombre
+                let precio = producto.precio
+                let cantidad = parseInt(document.getElementById("cantidad").value)
+                document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion).toFixed(2)
+            }
+        })*/
+    })
 }
+}
+
+botonCarrito.addEventListener('click', () => {
+    let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
+
+    productosModal(productosDelStorage)
+    
+})
 
 function compraTotal(productosStorage) {
     acumulador = 0;
@@ -80,32 +117,30 @@ function compraTotal(productosStorage) {
 
     if(acumulador == 0) {
         precioTotal.innerHTML = ""
-        modalBody.innerHTML = "<p>No hay productos agregados en el carrito </p>" 
+        modalBody.innerHTML = `<p class="fs-4">No hay productos agregados en el carrito </p>`
     } else {
-        precioTotal.innerHTML = `Importe total $${new Intl.NumberFormat("de-DE").format(acumulador)}`
+        precioTotal.innerHTML = `<p class="fs-4">Importe total $${new Intl.NumberFormat("de-DE").format(acumulador)}</p>`
     }
    
 }
 
-function cargarEventosModal(productosStorage) {
+function eventosModal(productosStorage) {
 
     productosStorage.forEach((productoCarrito, indice) => {
         document.getElementById(`botonEliminar${indice}`).addEventListener('click', () => {
-            console.log(`Producto ${productoCarrito.nombre} eliminado`)
             document.getElementById(`productoCarrito${indice}`).remove()
             productos.splice(indice, 1)
             localStorage.setItem('carrito', JSON.stringify(productos))
-            cargarProductosModal(JSON.parse(localStorage.getItem('carrito')))
+            productosModal(JSON.parse(localStorage.getItem('carrito')))
         })
     })
 
     productosStorage.forEach((productoCarrito, indice) => {
         document.getElementById(`sum${indice}`).addEventListener('click', () => {
-            console.log()
-            if(productos[indice].cant < productos[indice].stock) {
-                productos[indice].cant++
-                localStorage.setItem('carrito', JSON.stringify(productos))
-                cargarProductosModal(JSON.parse(localStorage.getItem('carrito')))
+            if(productoCarrito.cant < productoCarrito.stock) {
+                productoCarrito.cant++
+                localStorage.setItem('carrito', JSON.stringify(productosStorage))
+                productosModal(JSON.parse(localStorage.getItem('carrito')))
                 
             }
         })
@@ -113,65 +148,45 @@ function cargarEventosModal(productosStorage) {
 
     productosStorage.forEach((productoCarrito, indice) => {
         document.getElementById(`rest${indice}`).addEventListener('click', () => {
-            console.log()
-            if(productos[indice].cant > 1) {
-                productos[indice].cant--
-                localStorage.setItem('carrito', JSON.stringify(productos))
-                cargarProductosModal(JSON.parse(localStorage.getItem('carrito')))
+            if(productoCarrito.cant > 1) {
+                productoCarrito.cant--
+                localStorage.setItem('carrito', JSON.stringify(productosStorage))
+                productosModal(JSON.parse(localStorage.getItem('carrito')))
             }
         })
     })
     
 }
 
-function cargarProductosModal(productosStorage) {
+function productosModal(productosStorage) {
     modalBody.innerHTML = ""  
-    productosStorage.forEach((productoCarrito, indice) => {
+    productosStorage.forEach((productoCarrito,indice) => {
         modalBody.innerHTML += `
-            <div class="card border-primary mb-3" id ="productoCarrito${indice}" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="./assets/${productoCarrito.img}" class="img-fluid rounded-start" alt="${productoCarrito.nombre}">
+        <div class="card mb-3" id ="productoCarrito${indice}">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="../assets/${productoCarrito.img}" class="img-fluid rounded-start" alt="${productoCarrito.nombre}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title fs-4">${productoCarrito.nombre}</h5>
+                    <p class="card-text fs-4">$ ${productoCarrito.precio}</p>
+                    <p class="card-text fs-4">Cantidad: ${productoCarrito.cant}</p>
+                </div>
+                <div class="row">
+                    <div>
+                        <button class= "btn btn-outline-secondary" id="sum${indice}"><i class="fas fa-plus"></i></button>
+                        <button class= "btn btn-outline-secondary" id="rest${indice}"><i class="fas fa-minus"></i></button> 
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">${productoCarrito.nombre}</h5>
-                            <div class="row">
-                                <p class="card-text">Cantidad: ${productoCarrito.cant}</p>
-                                <button class= "btn btn-outline-secondary" id="sum${indice}"><i class="fas fa-plus"></i></button>
-                                <button class= "btn btn-outline-secondary" id="rest${indice}"><i class="fas fa-minus"></i></button> 
-                            </div>
-                            <p class="card-text">$${new Intl.NumberFormat("de-DE").format(productoCarrito.precio * productoCarrito.cant)}</p> 
-                            <button class= "btn btn-danger" id="botonEliminar${indice}"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </div>
+                    <button class= "btn btn-danger trashCarrito" id="botonEliminar${indice}"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
+        </div>
+    </div>
         `
 })
 
-function breadcrumbProd(producto) {
-    document.getElementById('navProducto').innerHTML += `
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a class="breadcrumb-link" href="productos.html">Productos</a></li>
-            <li class="breadcrumb-item active breadcrumb-size" aria-current="page">${producto.nombre}</li>
-        </ol>
-    `
+eventosModal(productosStorage)
+compraTotal(productosStorage)
+
 }
-
-breadcrumbProd(producto)
-cargarEventosModal(productosDelStorage)
-compraTotal(productosDelStorage)
-}
-
-botonCarrito.addEventListener('click', () => {
-    let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
-
-    cargarProductosModal(productosDelStorage)
-    
-})
-
-botonFinalizarCompra.addEventListener('click', () => {
-    localStorage.setItem('carrito', JSON.stringify([]))
-    swal("Gracias por su compra!", "Los productos seran enviados en la brevedad", "success");
-})
