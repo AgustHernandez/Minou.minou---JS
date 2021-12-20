@@ -10,6 +10,9 @@ let sectionProductos = document.getElementById('sectionProductos')
 let page1 = document.getElementsById('page1')
 let page2 = document.getElementsById('page2')
 let pageAnt = document.getElementsById('pageSig')*/
+let url = new URL(window.location.href)
+let id = url.searchParams.get("id")
+const URLGET = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
 let pagProducto = document.getElementById('pagProducto')
 let botonCarrito = document.getElementById('botonCarrito')
 let modalBody = document.getElementById('modal-body')

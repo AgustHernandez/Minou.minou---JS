@@ -1,4 +1,4 @@
-function imprimirProducto(producto) {
+/*function imprimirProducto(producto) {
     if (pagProducto != null) {
         pagProducto.innerHTML +=`
             <article class="col-lg-4 col-md-6 col-sm-4" id="producto${producto.code}">
