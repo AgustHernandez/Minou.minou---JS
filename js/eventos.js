@@ -1,4 +1,4 @@
-/*function imprimirProducto(producto) {
+function imprimirProducto(producto) {
     if (pagProducto != null) {
         pagProducto.innerHTML +=`
             <article class="col-lg-4 col-md-6 col-sm-4" id="producto${producto.code}">
@@ -89,7 +89,7 @@
             document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion).toFixed(2)
         })
         
-        /*$.get(URLGET, function (respuesta, estado) {
+        $.get(URLGET, function (respuesta, estado) {
             if(estado === "success"){
                 let cotizacion = parseFloat(respuesta[0].casa.venta)
                 let nombreProducto = producto.nombre
@@ -97,10 +97,9 @@
                 let cantidad = parseInt(document.getElementById("cantidad").value)
                 document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion).toFixed(2)
             }
-        })*/
+        })
     })
-}
-}
+}}
 
 botonCarrito.addEventListener('click', () => {
     let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
@@ -185,8 +184,7 @@ function productosModal(productosStorage) {
     </div>
         `
 })
+}
 
 eventosModal(productosStorage)
 compraTotal(productosStorage)
-
-}

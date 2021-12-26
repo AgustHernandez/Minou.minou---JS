@@ -19,7 +19,7 @@ let modalBody = document.getElementById('modal-body')
 let botonFinalizarCompra = document.getElementById('botonFinalizarCompra')
 let precioTotal = document.getElementById('precioTotal')
 let acumulador;
-const URLGET = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
+//const URLGET = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
 
 
 fetch('../data/productos.json')
