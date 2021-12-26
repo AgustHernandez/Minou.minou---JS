@@ -271,42 +271,24 @@ body {
 #producto4 {
     display: none;
 }*/
-.divSwitchDolar {
-  width: 1500px;
-  display: flex;
-  justify-content: end;
-  align-items: flex-end; }
+.btnRadioMoneda {
+  width: 80px; }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 85px;
-  height: 30px; }
+.btn-outline-primary {
+  border-color: #fff;
+  color: #D9C0BA; }
 
-.inputSwitch {
-  display: none; }
+.btn-check:hover + .btn-outline-primary {
+  background-color: #C49D9D;
+  border-color: #F97C7C; }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #8C5346;
-  -webkit-transition: .4s;
-  transition: .4s; }
+.btn-check:focus + .btn-outline-primary {
+  border-color: #F97C7C; }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 21px;
-  width: 21px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s; }
+.btn-check:checked + .btn-outline-primary {
+  color: #fff;
+  background-color: #F97C7C;
+  border-color: #F97C7C; }
 
 input:checked + .slider {
   background-color: #b47761; }
