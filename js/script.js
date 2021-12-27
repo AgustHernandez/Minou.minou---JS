@@ -1,25 +1,17 @@
-//let inventario = obtenerInventario()
 let carritoCompra = new Carrito()
 carritoCompra.obtenerDeStorage()
+selectMoneda()
 
-
-//localStorage.setItem('carrito', JSON.stringify([]))
 let articleProductos = document.getElementById('articleProductos')
 let sectionProductos = document.getElementById('sectionProductos')
-/*let pageAnt = document.getElementsById('pageAnt')
-let page1 = document.getElementsById('page1')
-let page2 = document.getElementsById('page2')
-let pageAnt = document.getElementsById('pageSig')*/
 let url = new URL(window.location.href)
 let id = url.searchParams.get("id")
-const URLGET = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
 let pagProducto = document.getElementById('pagProducto')
 let botonCarrito = document.getElementById('botonCarrito')
 let modalBody = document.getElementById('modal-body')
 let botonFinalizarCompra = document.getElementById('botonFinalizarCompra')
 let precioTotal = document.getElementById('precioTotal')
 let acumulador;
-//const URLGET = "https://www.dolarsi.com/api/api.php?type=valoresprincipales"
 
 
 fetch('../data/productos.json')
@@ -27,15 +19,16 @@ fetch('../data/productos.json')
 .then(dataProductos => {
    dataProductos.slice(0, 6).forEach((producto, indice)=> {
         if (articleProductos != null) {
+            let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
             articleProductos.innerHTML +=`
                 <article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
                     <div class="card text-center bg-transparent">
                         <div>
-                            <a href="./vistas/producto.html?id=${producto.code}"><img class="card-img-top cardImgBorder" src="./assets/${producto.img}" alt="${producto.nombre}"></a>
+                            <a href="./vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="./assets/${prod.img}" alt="${prod.nombre}"></a>
                         </div>
                         <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
-                            <h4 class="card-title fs-3">${producto.nombre}</h4>
-                            <p class="card-text fs-4">$ ${producto.precio}</p>
+                            <h4 class="card-title fs-3">${prod.nombre}</h4>
+                            <p class="card-text fs-4">$ ${prod.valor}</p>
                         </div>
                     </div>
                 </article>
@@ -44,15 +37,16 @@ fetch('../data/productos.json')
 
     dataProductos.forEach((producto, indice)=> {
         if (sectionProductos != null) {
+            let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
             sectionProductos.innerHTML +=`
                 <article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
                     <div class="card text-center bg-transparent">
                         <div>
-                            <a href="../vistas/producto.html?id=${producto.code}"><img class="card-img-top cardImgBorder" src="../assets/${producto.img}" alt="${producto.nombre}"></a>
+                            <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.img}" alt="${prod.nombre}"></a>
                         </div>
                         <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
-                            <h4 class="card-title fs-3">${producto.nombre}</h4>
-                            <p class="card-text fs-4">$ ${producto.precio}</p>
+                            <h4 class="card-title fs-3">${prod.nombre}</h4>
+                            <p class="card-text fs-4">$ ${prod.valor}</p>
                         </div>
                     </div>
                 </article>
@@ -85,6 +79,15 @@ fetch('../data/productos.json')
     }
 })
 
+function selectMoneda() {
+    if ((localStorage.getItem("monedaUsuario")) == "U$S") {
+        document.getElementById("btnDolar").setAttribute("checked","")
+        document.getElementById("btnPesos").removeAttribute("checked")
+    }else{
+        document.getElementById("btnPesos").setAttribute("checked","")
+        document.getElementById("btnDolar").removeAttribute("checked")
+    }
+}
 
 
 

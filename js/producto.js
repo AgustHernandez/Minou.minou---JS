@@ -10,6 +10,22 @@ class Producto {
         this.cant = 1
     }
 
+    get valor()
+    {
+        return (this.precio / obtenerCotizacion()).toFixed(2)
+    }
+
+    get HTMLCantidad(){
+     let result = ""
+     let index = 1;
+     while(index <= this.stock)
+     {
+         result += "<option value="+index+">"+index+"</option>"
+         index++;
+     }
+     return result
+    }
+
     valorIVA(){
         return this.precio * this.IVA;
     }

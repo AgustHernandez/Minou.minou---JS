@@ -1,26 +1,24 @@
 function imprimirProducto(producto) {
     if (pagProducto != null) {
+        let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
         pagProducto.innerHTML +=`
-            <article class="col-lg-4 col-md-6 col-sm-4" id="producto${producto.code}">
+            <article class="col-lg-4 col-md-6 col-sm-4" id="producto${prod.code}">
                 <div class="position-relative hiddenProduct">
                     <div>
-                        <img src="../assets/${producto.img}" class="d-block w-100 border-img position-relative imgProducto" alt="${producto.nombre}">
+                        <img src="../assets/${prod.img}" class="d-block w-100 border-img position-relative imgProducto" alt="${prod.nombre}">
                     </div>
                 </div>
             </article>
             <article class="col-lg-4 col-md-6 col-sm-3 mb-5">
                 <div>
-                    <h4 class="display-4 m-5 text-center" id="tituloProducto">${producto.nombre}</h4>
+                    <h4 class="display-4 m-5 text-center" id="tituloProducto">${prod.nombre}</h4>
                     <p class="text-center m-5 fs-3 lh-base">Diseño personalizable</p>
                 </div>
                 <div class="text-center gy-5">
                     <form action="#" method="#" id="formProducto">
                         <div class="row mb-3 position">
                             <label class="fs-4" for="cantidad">Cantidad:</label>
-                            <select class="form-select fs-4 text-center w-sm-100 position casillero" name="cantidad" id="cantidad">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                            <select class="form-select fs-4 text-center w-sm-100 position casillero" name="cantidad" id="cantidad">${prod.HTMLCantidad}}
                             </select>
                         </div>
                         <div class="row mb-3 position">
@@ -32,10 +30,10 @@ function imprimirProducto(producto) {
                             </select>
                         </div>
                         <div class="d-inline-flex p-3   justify-content-center align-items-center w-100 gx mt-3">
-                            <p class="fs-1 wdth text-center lh-base" id="precioProducto">$ ${producto.precio}</p>
+                            <p class="fs-1 wdth text-center lh-base" id="precioProducto">$ ${prod.valor}</p>
                         </div>
                         <div class="d-inline-flex p-3 justify-content-center align-items-center w-100 gx mt-3">
-                            <button type="button" class="btn btnProducto btn-lg" id= "boton${producto.code}">Agregar al carrito.</button>
+                            <button type="button" class="btn btnProducto btn-lg" id= "boton${prod.code}">Agregar al carrito.</button>
                         </div>
                     </form>
                 </div>
@@ -62,16 +60,16 @@ function imprimirProducto(producto) {
             </article>
     `
     document.getElementById("cantidad").addEventListener('change', () => {
-        let nombreProducto = producto.nombre
-        let precio = producto.precio
+        let nombreProducto = prod.nombre
+        let precio = prod.valor
         let cantidad = parseInt(document.getElementById("cantidad").value)
         let valor = cantidad * precio
         document.getElementById("precioProducto").innerText ="$ " + valor
     })
 
     document.getElementById("btnPesos").addEventListener('click', () => {
-        let nombreProducto = producto.nombre
-        let precio = producto.precio
+        let nombreProducto = prod.nombre
+        let precio = prod.precio
         let cantidad = parseInt(document.getElementById("cantidad").value)
         let valor = cantidad * precio
         document.getElementById("precioProducto").innerText ="$ " + valor
@@ -100,6 +98,15 @@ function imprimirProducto(producto) {
         })
     })
 }}
+
+document.getElementById("btnPesos").addEventListener('click', () => {
+    localStorage.setItem("monedaUsuario", "AR$")
+})
+
+document.getElementById("btnDolar").addEventListener('click', () => {
+    localStorage.setItem("monedaUsuario", "U$S")
+    consultarAPIDolar();
+})
 
 botonCarrito.addEventListener('click', () => {
     let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
