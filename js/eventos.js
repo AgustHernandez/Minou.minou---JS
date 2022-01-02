@@ -105,7 +105,7 @@ document.getElementById("btnPesos").addEventListener('click', () => {
 
 document.getElementById("btnDolar").addEventListener('click', () => {
     localStorage.setItem("monedaUsuario", "U$S")
-    consultarAPIDolar();
+    guardarCotizacionDolar()
 })
 
 botonCarrito.addEventListener('click', () => {

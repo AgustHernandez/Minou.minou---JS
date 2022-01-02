@@ -1,6 +1,7 @@
 let carritoCompra = new Carrito()
 carritoCompra.obtenerDeStorage()
 selectMoneda()
+guardarCotizacionDolar()
 
 let articleProductos = document.getElementById('articleProductos')
 let sectionProductos = document.getElementById('sectionProductos')

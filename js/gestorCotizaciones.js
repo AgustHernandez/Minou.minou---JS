@@ -24,36 +24,39 @@ function obtenerCotizacion() {
 }
 
 function obtenerCotizacionDolar() {
-    let keyCotizacion = localStorage.getItem("cotiz")
-    let aux = 1
+    let keyCotizacion = localStorage.getItem("COTIZACION_USD")
+    if (keyCotizacion == null) {
+        return 1;
+    }
+    return parseFloat(JSON.parse(keyCotizacion).valor)
+}
+
+function guardarCotizacionDolar(){
+    let keyCotizacion = localStorage.getItem("COTIZACION_USD")
     let cotizacion = new cotizacionDolar(Date.now(), 1)
     if (keyCotizacion == null) {
-            consultarAPIDolar();
-    setTimeout(() => {  
-        cotizacion = JSON.parse(localStorage.getItem("cotiz")); }, 5000);
-            
+        consultarAPIDolar();
+        return;
     } else {
         let cotizActual = JSON.parse(keyCotizacion)
         let fechaBusqueda = (cotizActual.ultimaActualizacion)
         let fechaActual = cotizacion.ultimaActualizacion
         if (((fechaActual - fechaBusqueda) / (1000*60*60*24)) < 1) {
-            cotizacion.ultimaActualizacion = cotizActual.ultimaActualizacion
-            cotizacion.valor = cotizActual.valor    
+            localStorage.setItem("COTIZACION_USD", JSON.stringify(cotizActual))
+            return;
         } else {
-            setTimeout(consultarAPIDolar(),3000);
-            cotizacion = Json.parse(localStorage.getItem("cotiz"));
+            consultarAPIDolar();
+            return;
         }
     }
-    localStorage.setItem("cotiz", JSON.stringify(cotizacion))
-    return parseFloat(cotizacion.valor)
 }
 
-async function consultarAPIDolar(){
+function consultarAPIDolar(){
      fetch(URLGET)
     .then(promesa => promesa.json())
     .then(datos => {
         let cotizDolar = new cotizacionDolar(Date.now(),parseFloat(datos[0].casa.venta).toFixed(2))
-        localStorage.setItem("cotiz",JSON.stringify(cotizDolar))
+        localStorage.setItem("COTIZACION_USD",JSON.stringify(cotizDolar))
     })
     .catch(error => console.log(error))
 }
