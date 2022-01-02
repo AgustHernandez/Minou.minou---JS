@@ -1,3 +1,14 @@
+function badgeCarrito () {
+    let cantProdCarrito = JSON.parse(localStorage.getItem('carrito'))
+    if (cantProdCarrito != 0) {
+        document.getElementById("cantCarrito").innerHTML +=`
+            <span class="position-absolute top-0 start-50 badge bg-light text-dark">${cantProdCarrito[0].cant}</span>
+        `
+    }
+}
+
+badgeCarrito ()
+
 function imprimirProducto(producto) {
     if (pagProducto != null) {
         let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
@@ -32,8 +43,9 @@ function imprimirProducto(producto) {
                         <div class="d-inline-flex p-3   justify-content-center align-items-center w-100 gx mt-3">
                             <p class="fs-1 wdth text-center lh-base" id="precioProducto">$ ${prod.valor}</p>
                         </div>
-                        <div class="d-inline-flex p-3 justify-content-center align-items-center w-100 gx mt-3">
-                            <button type="button" class="btn btnProducto btn-lg" id= "boton${prod.code}">Agregar al carrito.</button>
+                        <div class="p-3 justify-content-center align-items-center w-100 gx mt-3">
+                            <button type="button" class="btn btnProducto btn-lg" id= "boton${prod.code}">Agregar al carrito</button>
+                            <p class="fs-5 d-none mt-3" id="textVerCarrito">Se agregó el producto al carrito <br> <a id="botonCarrito" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#carritoActual">VER CARRITO</a></p>
                         </div>
                     </form>
                 </div>
@@ -60,22 +72,22 @@ function imprimirProducto(producto) {
             </article>
     `
     fetch('../data/productos.json')
-.then(response => response.json())
-.then(dataProductos => {
-   dataProductos.sort(() => Math.random() - Math.random()).slice(0, 2).forEach((producto, indice)=> {
-    let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
-       document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
-       <div class="card text-center bg-transparent">
-           <div>
-               <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.img}" alt="${prod.nombre}"></a>
-           </div>
-           <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
-               <h4 class="card-title fs-3">${prod.nombre}</h4>
-               <p class="card-text fs-4">$ ${prod.valor}</p>
-           </div>
-       </div>
-   </article>`
-    });
+    .then(response => response.json())
+    .then(dataProductos => {
+        dataProductos.sort(() => Math.random() - Math.random()).slice(0, 2).forEach((producto, indice)=> {
+            let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
+            document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
+            <div class="card text-center bg-transparent">
+                <div>
+                    <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.img}" alt="${prod.nombre}"></a>
+                </div>
+                <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
+                    <h4 class="card-title fs-3">${prod.nombre}</h4>
+                    <p class="card-text fs-4">$ ${prod.valor}</p>
+                </div>
+            </div>
+        </article>`
+    })
 })    
 
     document.getElementById("cantidad").addEventListener('change', () => {
@@ -124,7 +136,8 @@ document.getElementById('botonCarrito').addEventListener('click', () => {
 
     productosModal(productosDelStorage)
     eventosModal(productosDelStorage)
-    compraTotal(productosDelStorage) 
+    compraTotal(productosDelStorage)
+
 })
 
 function compraTotal(productosStorage) {
@@ -259,19 +272,3 @@ function productosModal(productosStorage) {
 })
 }
 
-//eventosModal(JSON.parse(localStorage.getItem('carrito')))
-//compraTotal(productosStorage)
-
-function badgeCarrito () {
-    let cantProdCarrito = JSON.parse(localStorage.getItem('carrito'))
-    if (cantProdCarrito != 0) {
-        document.getElementById("cantCarrito").innerHTML +=`
-            <span class="position-absolute top-0 start-50 badge bg-light text-dark">${cantProdCarrito[0].cant}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-            </svg>
-        `
-    }
-}
-
-badgeCarrito ()
