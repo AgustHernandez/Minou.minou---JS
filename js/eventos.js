@@ -59,12 +59,35 @@ function imprimirProducto(producto) {
                 </article>
             </article>
     `
+    fetch('../data/productos.json')
+.then(response => response.json())
+.then(dataProductos => {
+   dataProductos.sort(() => Math.random() - Math.random()).slice(0, 2).forEach((producto, indice)=> {
+    let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
+       document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
+       <div class="card text-center bg-transparent">
+           <div>
+               <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.img}" alt="${prod.nombre}"></a>
+           </div>
+           <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
+               <h4 class="card-title fs-3">${prod.nombre}</h4>
+               <p class="card-text fs-4">$ ${prod.valor}</p>
+           </div>
+       </div>
+   </article>`
+    });
+})    
+
     document.getElementById("cantidad").addEventListener('change', () => {
         let nombreProducto = prod.nombre
         let precio = prod.valor
         let cantidad = parseInt(document.getElementById("cantidad").value)
-        let valor = cantidad * precio
-        document.getElementById("precioProducto").innerText ="$ " + valor
+        let valor = (cantidad * precio).toFixed(2)
+        if(localStorage.getItem("monedaUsuario") == "U$S") {
+            document.getElementById("precioProducto").innerText ="U$S " + valor
+        } else {
+            document.getElementById("precioProducto").innerText ="$ " + valor
+        }
     })
 
     document.getElementById("btnPesos").addEventListener('click', () => {
@@ -77,48 +100,38 @@ function imprimirProducto(producto) {
     })    
     
     document.getElementById("btnDolar").addEventListener('click', () => {
-        fetch(URLGET)
-        .then((resp) => resp.json())
-        .then(function(data) {
-            let cotizacion = parseFloat(data[0].casa.venta)
-            let nombreProducto = producto.nombre
-            let precio = producto.precio
-            let cantidad = parseInt(document.getElementById("cantidad").value)
-            document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion).toFixed(2)
-        })
-        
-        $.get(URLGET, function (respuesta, estado) {
-            if(estado === "success"){
-                let cotizacion = parseFloat(respuesta[0].casa.venta)
-                let nombreProducto = producto.nombre
-                let precio = producto.precio
-                let cantidad = parseInt(document.getElementById("cantidad").value)
-                document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion).toFixed(2)
-            }
-        })
+        let cotizacion = JSON.parse(localStorage.getItem("COTIZACION_USD"))
+        let nombreProducto = producto.nombre
+        let precio = producto.precio
+        let cantidad = parseInt(document.getElementById("cantidad").value)
+        document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion.valor).toFixed(2)
     })
 }}
 
 document.getElementById("btnPesos").addEventListener('click', () => {
     localStorage.setItem("monedaUsuario", "AR$")
+    actualizarPagina()
 })
 
 document.getElementById("btnDolar").addEventListener('click', () => {
     localStorage.setItem("monedaUsuario", "U$S")
     guardarCotizacionDolar()
+    actualizarPagina()
 })
 
-botonCarrito.addEventListener('click', () => {
+document.getElementById('botonCarrito').addEventListener('click', () => {
     let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
 
     productosModal(productosDelStorage)
-    
+    eventosModal(productosDelStorage)
+    compraTotal(productosDelStorage) 
 })
 
 function compraTotal(productosStorage) {
     acumulador = 0;
     productosStorage.forEach((productoCarrito) => {
-        acumulador += productoCarrito.precio * productoCarrito.cant
+        let prod = new Producto(productoCarrito.code, productoCarrito.nombre, productoCarrito.precio, productoCarrito.stock, productoCarrito.img, productoCarrito.nombreHTML)
+        acumulador += prod.valor * productoCarrito.cant
     })
 
     if(acumulador == 0) {
@@ -130,6 +143,58 @@ function compraTotal(productosStorage) {
    
 }
 
+function actualizarPagina() {
+    if(window.location.href.includes("index")) {
+        articleProductos.innerHTML = ""
+        fetch('../data/productos.json')
+        .then(response => response.json())
+        .then(dataProductos => {
+            dataProductos.slice(0, 6).forEach((producto, indice)=> {
+                if (articleProductos != null) {
+                    let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
+                    articleProductos.innerHTML +=`
+                        <article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
+                            <div class="card text-center bg-transparent">
+                                <div>
+                                    <a href="./vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="./assets/${prod.img}" alt="${prod.nombre}"></a>
+                                </div>
+                                <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
+                                    <h4 class="card-title fs-3">${prod.nombre}</h4>
+                                    <p class="card-text fs-4">$ ${prod.valor}</p>
+                                </div>
+                            </div>
+                        </article>
+                        `}
+                    })
+            })
+    }
+    if(window.location.href.includes("productos")) {
+        sectionProductos.innerHTML = ""
+        fetch('../data/productos.json')
+        .then(response => response.json())
+        .then(dataProductos => {
+            dataProductos.forEach((producto, indice)=> {
+                if (sectionProductos != null) {
+                    let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
+                    sectionProductos.innerHTML +=`
+                        <article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
+                            <div class="card text-center bg-transparent">
+                                <div>
+                                    <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.
+                                        img}" alt="${prod.nombre}"></a>
+                                </div>
+                                <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
+                                    <h4 class="card-title fs-3">${prod.nombre}</h4>
+                                    <p class="card-text fs-4">$ ${prod.valor}</p>
+                                </div>
+                            </div>
+                        </article>
+                    `}
+            })
+        })
+    }
+}
+
 function eventosModal(productosStorage) {
 
     productosStorage.forEach((productoCarrito, indice) => {
@@ -137,27 +202,28 @@ function eventosModal(productosStorage) {
             document.getElementById(`productoCarrito${indice}`).remove()
             productos.splice(indice, 1)
             localStorage.setItem('carrito', JSON.stringify(productos))
-            productosModal(JSON.parse(localStorage.getItem('carrito')))
+            compraTotal(productos)
         })
     })
 
     productosStorage.forEach((productoCarrito, indice) => {
-        document.getElementById(`sum${indice}`).addEventListener('click', () => {
+        document.getElementById(`sum${productoCarrito.code}`).addEventListener('click', () => {
             if(productoCarrito.cant < productoCarrito.stock) {
                 productoCarrito.cant++
                 localStorage.setItem('carrito', JSON.stringify(productosStorage))
-                productosModal(JSON.parse(localStorage.getItem('carrito')))
-                
+                document.getElementById(`textoCantidad${indice}`).innerHTML = "Cantidad: "+productoCarrito.cant
+                compraTotal(productosStorage)
             }
         })
     })
 
     productosStorage.forEach((productoCarrito, indice) => {
-        document.getElementById(`rest${indice}`).addEventListener('click', () => {
+        document.getElementById(`rest${productoCarrito.code}`).addEventListener('click', () => {
             if(productoCarrito.cant > 1) {
                 productoCarrito.cant--
                 localStorage.setItem('carrito', JSON.stringify(productosStorage))
-                productosModal(JSON.parse(localStorage.getItem('carrito')))
+                document.getElementById(`textoCantidad${indice}`).innerHTML = "Cantidad: "+productoCarrito.cant
+                compraTotal(productosStorage)
             }
         })
     })
@@ -165,7 +231,7 @@ function eventosModal(productosStorage) {
 }
 
 function productosModal(productosStorage) {
-    modalBody.innerHTML = ""  
+    modalBody.innerHTML = "" 
     productosStorage.forEach((productoCarrito,indice) => {
         modalBody.innerHTML += `
         <div class="card mb-3" id ="productoCarrito${indice}">
@@ -176,13 +242,13 @@ function productosModal(productosStorage) {
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title fs-4">${productoCarrito.nombre}</h5>
-                    <p class="card-text fs-4">$ ${productoCarrito.precio}</p>
-                    <p class="card-text fs-4">Cantidad: ${productoCarrito.cant}</p>
+                    <p class="card-text fs-4">$ ${(productoCarrito.precio / obtenerCotizacion()).toFixed(2)}</p>
+                    <p class="card-text fs-4" id="textoCantidad${indice}">Cantidad: ${productoCarrito.cant}</p>
                 </div>
                 <div class="row">
                     <div>
-                        <button class= "btn btn-outline-secondary" id="sum${indice}"><i class="fas fa-plus"></i></button>
-                        <button class= "btn btn-outline-secondary" id="rest${indice}"><i class="fas fa-minus"></i></button> 
+                        <button class= "btn btn-outline-secondary" id="sum${productoCarrito.code}"><i class="fas fa-plus"></i></button>
+                        <button class= "btn btn-outline-secondary" id="rest${productoCarrito.code}"><i class="fas fa-minus"></i></button> 
                     </div>
                     <button class= "btn btn-danger trashCarrito" id="botonEliminar${indice}"><i class="fas fa-trash-alt"></i></button>
                 </div>
@@ -193,5 +259,19 @@ function productosModal(productosStorage) {
 })
 }
 
-eventosModal(productosStorage)
-compraTotal(productosStorage)
+//eventosModal(JSON.parse(localStorage.getItem('carrito')))
+//compraTotal(productosStorage)
+
+function badgeCarrito () {
+    let cantProdCarrito = JSON.parse(localStorage.getItem('carrito'))
+    if (cantProdCarrito != 0) {
+        document.getElementById("cantCarrito").innerHTML +=`
+            <span class="position-absolute top-0 start-50 badge bg-light text-dark">${cantProdCarrito[0].cant}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+            </svg>
+        `
+    }
+}
+
+badgeCarrito ()
