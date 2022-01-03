@@ -22,54 +22,40 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="../index.html">INICIO</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productos.html" aria-current="page">PRODUCTOS</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="productos.html" aria-current="page">PRODUCTOS</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="nosotros.html">NOSOTROS</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="404.html">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="contacto.html">CONTACTO</a></li>
-                    <li class="nav-item position-relative" id="cantCarrito">
-                    </li>
                 </ul>
+            </div>
+            <div>
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item position-relative px-5" id="cantCarrito" data-bs-toggle="modal" data-bs-target="#carritoActual">
+                        <span class="position-absolute top-0 start-50 badge bg-light text-dark"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag text-light" viewBox="0 0 16 16">
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                        </svg>
+                    </li>
+                    <li class="nav-item">
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnPesos" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="btnPesos">AR$</label>
+                      
+                            <input type="radio" class="btn-check" name="btnradio" id="btnDolar" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="btnDolar">U$S</label>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
         <section class="container-lg">
-            <h2 class="display-4 m-5 text-center">CARRITO DE COMPRAS</h2>
+            <h2 class="display-4 m-5 text-center">FINALIZAR COMPRA</h2>
             <section class="row align-items-center justify-content-center mt-5 carrito">
-                <div class="divVaciarCarrito">
-                    <button class="btn btnVaciarCarrito" id="vaciarCarrito">Vaciar carrito</button>
-                </div>
-                <article class="col-lg-6 col-md-6 col-sm-6 w-100 tablaCarrito" id="productosCarrito">
-                    <table class="table" id="tabla">
-                        <thead class="thead text-center">
-                            <tr>
-                                <th colspan="2" class="tableProduct">Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>IVA</th>
-                                <th>Subtotal</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tableImg"><img class="border-img imgCarrito" src="../assets/taza.jpg" alt="taza de ceramica"></td>
-                                <td class="tableDetalle">Taza de Ceramica Gris</td>
-                                <td class="text-center tableCantidad">2</td>
-                                <td class="text-center tablePrecio">$ 900</td>
-                                <td class="text-center tablePrecio" id="IVA">$ 0</td>
-                                <td class="text-center tableSubtotal">$ 900</td>
-                                <td class="tableTrash text-center"><button class="buttonTrash">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M16 1.75V3h5.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H8V1.75C8 .784 8.784 0 9.75 0h4.5C15.216 0 16 .784 16 1.75zm-6.5 0a.25.25 0 01.25-.25h4.5a.25.25 0 01.25.25V3h-5V1.75z"></path><path d="M4.997 6.178a.75.75 0 10-1.493.144L4.916 20.92a1.75 1.75 0 001.742 1.58h10.684a1.75 1.75 0 001.742-1.581l1.413-14.597a.75.75 0 00-1.494-.144l-1.412 14.596a.25.25 0 01-.249.226H6.658a.25.25 0 01-.249-.226L4.997 6.178z"></path><path d="M9.206 7.501a.75.75 0 01.793.705l.5 8.5A.75.75 0 119 16.794l-.5-8.5a.75.75 0 01.705-.793zm6.293.793A.75.75 0 1014 8.206l-.5 8.5a.75.75 0 001.498.088l.5-8.5z"></path></svg></td>
-                                </button>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
                 <article class="col-lg-12 col-md-6 col-sm-6 mt-5 articleEnvio datosEnvio item3">
                     <h3>Datos de Envío</h3>
                     <div class="mt-5">
@@ -117,6 +103,33 @@
                     <div class="row envio item4">
                         <div class="col-lg-2 imgCamion">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="25" height="25"><path d="M624 368h-16V251.9c0-19-7.7-37.5-21.1-50.9L503 117.1C489.6 103.7 471 96 452.1 96H416V56c0-30.9-25.1-56-56-56H56C25.1 0 0 25.1 0 56v304c0 30.9 25.1 56 56 56h8c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm-464 96c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm208-96H242.7c-16.6-28.6-47.2-48-82.7-48s-66.1 19.4-82.7 48H56c-4.4 0-8-3.6-8-8V56c0-4.4 3.6-8 8-8h304c4.4 0 8 3.6 8 8v312zm48-224h36.1c6.3 0 12.5 2.6 17 7l73 73H416v-80zm64 320c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-100.9c-17.2-25.9-46.6-43.1-80-43.1-24.7 0-47 9.6-64 24.9V272h144v91.1z"></path></svg>
+                        </div>
+                        <div class="col-lg-9 textDomicilio mb-5">
+                            <h4>Envío a Domicilio</h4>
+                        </div>
+                        <div class="col-lg-12 envios">
+                            <div class="listEnvios position-relative">
+                                <input type="radio" class="form-check-input" id="Entrega72" placeholder="Entrega72">
+                                <label for="Entrega72" class="form-check-label fs-5"><b> Entrega en 72 hs.</b><br>Llega entre 1 y 3 días hábiles</label>
+                                <div class="precioEnvio position-absolute">
+                                    <p class="textPrecio">$ 0</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="listEnvios position-relative">
+                                <input type="radio" class="form-check-input" id="Entrega24" placeholder="Entrega24">
+                                <label for="Entrega24" class="form-check-label fs-5"><b> Entrega en 24 hs.</b><br>Llega entre hoy y 1 días hábil</label>
+                                <div class="precioEnvio position-absolute">
+                                    <p class="textPrecio">$ 0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-lg-12 col-md-6 col-sm-6 mt-3 articleEnvio">
+                    <div class="row envio item4">
+                        <div class="col-lg-2 imgCamion">
+                            <i class="bi bi-credit-card" style="font-size: 2rem;"></i>
                         </div>
                         <div class="col-lg-9 textDomicilio mb-5">
                             <h4>Envío a Domicilio</h4>
