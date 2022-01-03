@@ -44,11 +44,8 @@ function imprimirProducto(producto) {
                             <p class="fs-1 wdth text-center lh-base" id="precioProducto">$ ${prod.valor}</p>
                         </div>
                         <div class="p-3 justify-content-center align-items-center w-100 gx mt-3">
-                            <button type="button" class="btn btnProducto btn-lg" id= "boton${prod.code}">Agregar al carrito</button>
-                            <p class="fs-5 mt-3" id="textVerCarrito">Se agregó el producto al carrito</p><a id="botonCarrito" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#carritoActual">VER CARRITO</a>
+                            <button type="button" class="btn btnProducto btn-lg" id="boton${prod.code}">Agregar al carrito</button>
                         </div>
-                    </form>
-                </div>
                     </form>
                 </div>
                 <div class="d-inline-flex p-3 justify-content-center align-items-center w-100 gx-5">
