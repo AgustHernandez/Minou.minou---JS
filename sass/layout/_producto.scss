@@ -101,61 +101,30 @@
     font-weight: 700;
 }
 
-.hiddenProduct {
-    &:hover {
-        .imgProducto {
-            opacity: 0.3;
-        }
-        .OverProducto {
-            opacity: 1;
-        }
-    }
-}
-
 .imgProducto {
-    opacity: 1;
     display: block;
     width: 100%;
     height: auto;
-    transition: .5s ease;
-    backface-visibility: hidden;
-}
-
-
-.breadcrumb-divider {
-    --bs-breadcrumb-divider: '>';
-}
-
-.breadcrumb-link {
-    text-decoration: none;
-    color: black;
-    font-size: 1.5rem;
-}
-
-.breadcrumb-size {
-    font-size: 1.5rem;
 }
 
 #productoAgregado {
     display: none;
 }
 
-.arrowProducto {
-    display: flex;
-    justify-content: end;
-    align-items:flex-end;
+#otrosProductos {
+    width: 600px;
 }
 
-/*#producto3 {
-    display: none;
+.arrowProducto {
+    width: auto;
+    display: flex;
+    align-items:center;
 }
-#producto4 {
-    display: none;
-}*/
 
 .btnRadioMoneda {
     width: 80px;
 }
+
 .btn-outline-primary {
     border-color: #fff;
     color: #D9C0BA;
@@ -176,7 +145,6 @@
     border-color: #F97C7C;
 }
 
-  
 input:checked + .slider {
     background-color: #b47761;
 }
@@ -204,13 +172,3 @@ input:checked + .slider:before {
 input:checked + .slider .pesos {display: block;}
 
 input:checked + .slider .dolares {display: none;}
-
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}

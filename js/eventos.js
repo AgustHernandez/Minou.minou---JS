@@ -45,7 +45,7 @@ function imprimirProducto(producto) {
                         </div>
                         <div class="p-3 justify-content-center align-items-center w-100 gx mt-3">
                             <button type="button" class="btn btnProducto btn-lg" id= "boton${prod.code}">Agregar al carrito</button>
-                            <p class="fs-5 d-none mt-3" id="textVerCarrito">Se agregó el producto al carrito <br> <a id="botonCarrito" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#carritoActual">VER CARRITO</a></p>
+                            <p class="fs-5 mt-3" id="textVerCarrito">Se agregó el producto al carrito</p><a id="botonCarrito" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#carritoActual">VER CARRITO</a>
                         </div>
                     </form>
                 </div>
@@ -76,7 +76,7 @@ function imprimirProducto(producto) {
     .then(dataProductos => {
         dataProductos.sort(() => Math.random() - Math.random()).slice(0, 2).forEach((producto, indice)=> {
             let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
-            document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-3 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
+            document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-4 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
             <div class="card text-center bg-transparent">
                 <div>
                     <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.img}" alt="${prod.nombre}"></a>
