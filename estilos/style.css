@@ -241,7 +241,7 @@ body {
   display: none; }
 
 #otrosProductos {
-  width: 600px; }
+  width: 650px; }
 
 .arrowProducto {
   width: auto;
@@ -314,62 +314,6 @@ input:checked + .slider .dolares {
   @media screen and (min-width: 1024px) {
     .carrito .col-lg-4 {
       width: 45rem; } }
-  .carrito .divVaciarCarrito {
-    width: 1500px;
-    display: flex;
-    justify-content: end;
-    align-items: flex-end; }
-  .carrito .btnVaciarCarrito {
-    width: 110px;
-    background-color: #73403C;
-    border-radius: 44px;
-    color: white;
-    font-size: 1.5rem; }
-  .carrito .tablaCarrito {
-    height: auto; }
-    .carrito .tablaCarrito .table {
-      margin-bottom: 0;
-      border: 0 solid transparent; }
-      .carrito .tablaCarrito .table .thead {
-        font-size: 1.5rem;
-        font-weight: 600;
-        letter-spacing: 1.4;
-        line-height: 30px; }
-        .carrito .tablaCarrito .table .thead .tableProduct {
-          text-align: start;
-          width: auto; }
-      .carrito .tablaCarrito .table .tableImg {
-        width: 50px;
-        padding: 15px 10px 15px 5px; }
-        .carrito .tablaCarrito .table .tableImg .imgCarrito {
-          width: 12rem;
-          height: 12rem;
-          border-radius: 19px; }
-      .carrito .tablaCarrito .table .tableDetalle {
-        font-size: 1.2rem;
-        width: 115px;
-        vertical-align: middle;
-        letter-spacing: 2;
-        padding: 15px 10px 15px 5px; }
-      .carrito .tablaCarrito .table .tableCantidad {
-        padding: 15px 5px 15px 5px;
-        vertical-align: middle;
-        font-size: 1.2rem; }
-      .carrito .tablaCarrito .table .tablePrecio {
-        padding: 15px 5px 15px 5px;
-        vertical-align: middle;
-        font-size: 1.2rem; }
-      .carrito .tablaCarrito .table .tableSubtotal {
-        vertical-align: middle;
-        font-size: 1.2rem;
-        padding: 15px 5px 15px 5px; }
-      .carrito .tablaCarrito .table .tableTrash {
-        vertical-align: middle;
-        width: 50px;
-        padding: 15px 5px 15px 10px; }
-        .carrito .tablaCarrito .table .tableTrash .buttonTrash {
-          border: 0;
-          background-color: transparent; }
   .carrito .articleEnvio {
     height: 190px;
     justify-content: start;
