@@ -1,9 +1,9 @@
 function badgeCarrito () {
-    let cantProdCarrito = JSON.parse(localStorage.getItem('carrito'))
-    if (cantProdCarrito != 0) {
-        document.getElementById("cantCarrito").innerHTML +=`
-            <span class="position-absolute top-0 start-50 badge bg-light text-dark">${cantProdCarrito[0].cant}</span>
-        `
+    let carrito = JSON.parse(localStorage.getItem('carrito'))
+    if (carrito.length > 0) {
+        document.getElementById("cantCarrito").innerHTML = carrito.length
+    }else{
+        document.getElementById("cantCarrito").innerHTML = ""
     }
 }
 
@@ -41,7 +41,7 @@ function imprimirProducto(producto) {
                             </select>
                         </div>
                         <div class="d-inline-flex p-3   justify-content-center align-items-center w-100 gx mt-3">
-                            <p class="fs-1 wdth text-center lh-base" id="precioProducto">$ ${prod.valor}</p>
+                            <p class="fs-1 wdth text-center lh-base" id="precioProducto">${prod.simbolo} ${prod.valor}</p>
                         </div>
                         <div class="p-3 justify-content-center align-items-center w-100 gx mt-3">
                             <button type="button" class="btn btnProducto btn-lg" id="boton${prod.code}">Agregar al carrito</button>
@@ -71,16 +71,19 @@ function imprimirProducto(producto) {
     fetch('../data/productos.json')
     .then(response => response.json())
     .then(dataProductos => {
-        dataProductos.sort(() => Math.random() - Math.random()).slice(0, 2).forEach((producto, indice)=> {
+        let url = new URL(window.location.href)
+        let codeActual = url.searchParams.get("id")
+        dataProductos = dataProductos.filter(p=> p.code != codeActual) //Quiero que las sugerencias no incluyan el producto actual
+        dataProductos.sort(() => Math.random() - Math.random()).slice(0, MAX_SUGERENCIAS).forEach((producto, indice)=> {
             let prod = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto. nombreHTML)
-            document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-4 col-md-4 col-sm-4 col-8 cardProducto" id="producto${indice}">
+            document.getElementById("otrosProductos").innerHTML += `<article class="col-lg-4 col-md-4 col-sm-4 col-8 cardProducto" id="sugerencia${indice}">
             <div class="card text-center bg-transparent">
                 <div>
                     <a href="../vistas/producto.html?id=${prod.code}"><img class="card-img-top cardImgBorder" src="../assets/${prod.img}" alt="${prod.nombre}"></a>
                 </div>
                 <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
                     <h4 class="card-title fs-3">${prod.nombre}</h4>
-                    <p class="card-text fs-4">$ ${prod.valor}</p>
+                    <p class="card-text fs-4">${prod.simbolo} ${prod.valor}</p>
                 </div>
             </div>
         </article>`
@@ -88,32 +91,26 @@ function imprimirProducto(producto) {
 })    
 
     document.getElementById("cantidad").addEventListener('change', () => {
-        let nombreProducto = prod.nombre
         let precio = prod.valor
         let cantidad = parseInt(document.getElementById("cantidad").value)
         let valor = (cantidad * precio).toFixed(2)
-        if(localStorage.getItem("monedaUsuario") == "U$S") {
-            document.getElementById("precioProducto").innerText ="U$S " + valor
-        } else {
-            document.getElementById("precioProducto").innerText ="$ " + valor
-        }
+        document.getElementById("precioProducto").innerText = obtenerSimbolo() +" "+ valor
     })
 
     document.getElementById("btnPesos").addEventListener('click', () => {
-        let nombreProducto = prod.nombre
         let precio = prod.precio
         let cantidad = parseInt(document.getElementById("cantidad").value)
         let valor = cantidad * precio
         document.getElementById("precioProducto").innerText ="$ " + valor
-    
+        actualizarOtrosProductos()
     })    
     
     document.getElementById("btnDolar").addEventListener('click', () => {
         let cotizacion = JSON.parse(localStorage.getItem("COTIZACION_USD"))
-        let nombreProducto = producto.nombre
         let precio = producto.precio
         let cantidad = parseInt(document.getElementById("cantidad").value)
         document.getElementById("precioProducto").innerText ="U$S "+((precio * cantidad) / cotizacion.valor).toFixed(2)
+        actualizarOtrosProductos()
     })
 }}
 
@@ -128,14 +125,15 @@ document.getElementById("btnDolar").addEventListener('click', () => {
     actualizarPagina()
 })
 
-document.getElementById('botonCarrito').addEventListener('click', () => {
-    let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
-
-    productosModal(productosDelStorage)
-    eventosModal(productosDelStorage)
-    compraTotal(productosDelStorage)
-
-})
+if(document.getElementById('botonCarrito') != undefined)
+{
+    document.getElementById('botonCarrito').addEventListener('click', () => {
+        let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
+        productosModal(productosDelStorage)
+        eventosModal(productosDelStorage)
+        compraTotal(productosDelStorage)
+    })
+}
 
 function compraTotal(productosStorage) {
     acumulador = 0;
@@ -148,7 +146,7 @@ function compraTotal(productosStorage) {
         precioTotal.innerHTML = ""
         modalBody.innerHTML = `<p class="fs-4">No hay productos agregados en el carrito </p>`
     } else {
-        precioTotal.innerHTML = `<p class="fs-4">Importe total $${new Intl.NumberFormat("de-DE").format(acumulador)}</p>`
+        precioTotal.innerHTML = `<p class="fs-4">Importe total ${obtenerSimbolo()} ${new Intl.NumberFormat("de-DE").format(acumulador)}</p>`
     }
    
 }
@@ -170,7 +168,7 @@ function actualizarPagina() {
                                 </div>
                                 <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
                                     <h4 class="card-title fs-3">${prod.nombre}</h4>
-                                    <p class="card-text fs-4">$ ${prod.valor}</p>
+                                    <p class="card-text fs-4">${prod.simbolo} ${prod.valor}</p>
                                 </div>
                             </div>
                         </article>
@@ -195,7 +193,7 @@ function actualizarPagina() {
                                 </div>
                                 <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
                                     <h4 class="card-title fs-3">${prod.nombre}</h4>
-                                    <p class="card-text fs-4">$ ${prod.valor}</p>
+                                    <p class="card-text fs-4">${prod.simbolo} ${prod.valor}</p>
                                 </div>
                             </div>
                         </article>
@@ -203,6 +201,36 @@ function actualizarPagina() {
             })
         })
     }
+    if(window.location.href.includes("carritoCompra.html"))
+    {
+        let carrito = new Carrito()
+        carrito.obtenerDeStorage()
+        let totalCarrito = carrito.obtenerTotal()
+        document.getElementById("Entrega72").checked = true;
+        document.getElementById("precioEntrega24").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,24).toFixed(2)
+        document.getElementById("precioEntrega72").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)
+        document.getElementById("carritoCompraSubtotal").innerHTML = obtenerSimbolo() + " " + totalCarrito.toFixed(2)
+        document.getElementById("carritoCompraCostoEnvio").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)    
+        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,72)).toFixed(2) 
+    }
+}
+
+function actualizarOtrosProductos(){
+    fetch('../data/productos.json')
+    .then(response => response.json())
+    .then(dataProductos => {
+        indexSugerencia = 0
+        while(indexSugerencia <= MAX_SUGERENCIAS -1)
+        {
+            letURI = document.getElementById("sugerencia"+indexSugerencia).childNodes[1].childNodes[1].baseURI
+            let url = new URL(letURI)
+            let id = url.searchParams.get("id")
+            let productoInventario = dataProductos.filter(p => p.code == id)[0]
+            let prod = new Producto(productoInventario.code, productoInventario.nombre, productoInventario.precio, productoInventario.stock, productoInventario.img, productoInventario.nombreHTML);
+            document.getElementById("sugerencia"+indexSugerencia).childNodes[1].childNodes[3].childNodes[3].innerHTML = prod.simbolo+" "+prod.valor;
+            indexSugerencia++
+        }
+    })
 }
 
 function eventosModal(productosStorage) {
@@ -213,6 +241,7 @@ function eventosModal(productosStorage) {
             productos.splice(indice, 1)
             localStorage.setItem('carrito', JSON.stringify(productos))
             compraTotal(productos)
+            badgeCarrito ()
         })
     })
 
@@ -267,5 +296,40 @@ function productosModal(productosStorage) {
     </div>
         `
 })
+}
+
+function eventosFinalizarCompra()
+{
+    document.getElementById("Entrega24").addEventListener("click",()=>{
+        let carrito = new Carrito()
+        carrito.obtenerDeStorage()
+        let totalCarrito = carrito.obtenerTotal()
+        document.getElementById("Entrega24").checked = true
+        document.getElementById("Entrega72").checked = false
+        document.getElementById("carritoCompraCostoEnvio").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,24).toFixed(2)
+        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,24)).toFixed(2)
+    })
+
+    document.getElementById("Entrega72").addEventListener("click",()=>{
+        let carrito = new Carrito()
+        carrito.obtenerDeStorage()
+        let totalCarrito = carrito.obtenerTotal()
+        document.getElementById("Entrega72").checked = true
+        document.getElementById("Entrega24").checked = false
+        document.getElementById("carritoCompraCostoEnvio").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)   
+        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,24)).toFixed(2) 
+    })
+
+    document.getElementById("provincia").addEventListener('change',()=>{
+        let carrito = new Carrito()
+        carrito.obtenerDeStorage()
+        let totalCarrito = carrito.obtenerTotal()
+        document.getElementById("precioEntrega24").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,24).toFixed(2)
+        document.getElementById("precioEntrega72").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)
+        document.getElementById("carritoCompraCostoEnvio").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)    
+        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,72)).toFixed(2) 
+    })
+
+
 }
 

@@ -23,6 +23,14 @@ function obtenerCotizacion() {
     }
 }
 
+function obtenerSimbolo(){
+    if ((localStorage.getItem("monedaUsuario")) == "U$S") {
+        return  "U$S"
+    } else {
+        return "$"
+    }
+}
+
 function obtenerCotizacionDolar() {
     let keyCotizacion = localStorage.getItem("COTIZACION_USD")
     if (keyCotizacion == null) {

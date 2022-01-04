@@ -1,3 +1,5 @@
+//const { addListener } = require("nodemon")
+
 let carritoCompra = new Carrito()
 carritoCompra.obtenerDeStorage()
 selectMoneda()
@@ -29,7 +31,7 @@ fetch('../data/productos.json')
                         </div>
                         <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
                             <h4 class="card-title fs-3">${prod.nombre}</h4>
-                            <p class="card-text fs-4">$ ${prod.valor}</p>
+                            <p class="card-text fs-4">${prod.simbolo} ${prod.valor}</p>
                         </div>
                     </div>
                 </article>
@@ -47,7 +49,7 @@ fetch('../data/productos.json')
                         </div>
                         <div class="card-body cardBorder text-center text-dark pt-5 cardFondo lh-lg">
                             <h4 class="card-title fs-3">${prod.nombre}</h4>
-                            <p class="card-text fs-4">$ ${prod.valor}</p>
+                            <p class="card-text fs-4">${prod.simbolo} ${prod.valor}</p>
                         </div>
                     </div>
                 </article>
@@ -67,19 +69,27 @@ fetch('../data/productos.json')
                 lSCarrito = []
             }
             productos = lSCarrito;
+            let cantSeleccionada = parseInt(document.getElementById("cantidad").value)
             if(productos.find(product => product.nombre == producto.nombre)) {
                 let index = productos.findIndex(product => product.nombre == producto.nombre)
-                productos[index].cant++
+                productos[index].cant = Math.min(productos[index].stock,productos[index].cant + cantSeleccionada)
                 localStorage.setItem('carrito', JSON.stringify(productos))
             } else {
                 let nuevoProducto = new Producto(producto.code, producto.nombre, producto.precio, producto.stock, producto.img, producto.nombreHTML)
-                nuevoProducto.cant = parseInt(document.getElementById("cantidad").value)
+                nuevoProducto.cant = cantSeleccionada
                 productos.push(nuevoProducto)
                 localStorage.setItem('carrito', JSON.stringify(productos))
             }
+            badgeCarrito ()
         })
     }
 })
+
+if(window.location.href.includes("carritoCompra.html"))
+{
+    actualizarPagina()
+    eventosFinalizarCompra()
+}
 
 function selectMoneda() {
     if ((localStorage.getItem("monedaUsuario")) == "U$S") {

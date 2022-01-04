@@ -1,3 +1,4 @@
+const MAX_SUGERENCIAS = 2
 class Producto {
     constructor (code,nombre, precio, stock, nombreImg, nombreHTML) {
         this.code = code;
@@ -13,6 +14,11 @@ class Producto {
     get valor()
     {
         return (this.precio / obtenerCotizacion()).toFixed(2)
+    }
+
+    get simbolo()
+    {
+        return obtenerSimbolo()   
     }
 
     get HTMLCantidad(){

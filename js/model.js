@@ -1,3 +1,5 @@
+const COSTO_ENVIO_24=500
+const COSTO_ENVIO_72=200
 class Carrito {
     constructor () {
         this.productos = []
@@ -48,7 +50,9 @@ class Carrito {
         let obj = JSON.parse(localStorage.getItem("carrito"))
         if(obj != null) {
             while(index < obj.length) {
-                this.productos.push(new Producto(obj[index].code,obj[index].nombre,obj[index].precio,obj[index].stock,obj[index].img,obj[index].nombreHTML));
+                let prod = new Producto(obj[index].code,obj[index].nombre,obj[index].precio,obj[index].stock,obj[index].img,obj[index].nombreHTML)
+                prod.cant = obj[index].cant
+                this.productos.push(prod);
                 
                 index++
             }
@@ -58,7 +62,7 @@ class Carrito {
     obtenerTotal() {
         let total = 0
         for (let i = 0; i < this.productos.length; i++) {
-            total += this.productos[i].mostrarConIva()
+            total += this.productos[i].valor * this.productos[i].cant
         }
         return total
     }
@@ -73,33 +77,33 @@ function costoEnvio (costoProducto, provincia, tiempoEntrega) {
 
 function costoDistancia (provincia) {
     if (provincia === "CABA") {
-        return 0
+        return 0 / obtenerCotizacion()
     }
     else {
-        return 200
+        return 200 / obtenerCotizacion()
     }
 }
 
 function costoTiempoEntrega(tiempoEntrega, provincia) {
     if (provincia === "CABA") {
-        return 0
+        return 0 / obtenerCotizacion()
     }
     if (tiempoEntrega === 24) {
-        return 500
+        return 500 / obtenerCotizacion()
     }
     else {
-        return 200
+        return 200 / obtenerCotizacion()
     }
 }
 
 function costoSubtotal(costoProducto) {
     if (costoProducto < 1000) {
-        return 300
+        return 300 / obtenerCotizacion()
     }
     if (costoProducto >= 1000 && costoProducto < 5000) {
-        return 200
+        return 200 / obtenerCotizacion()
     }
     if (costoProducto >= 5000) {
-        return 0
+        return 0 / obtenerCotizacion()
     }
 }
