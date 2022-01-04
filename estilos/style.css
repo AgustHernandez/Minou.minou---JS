@@ -243,11 +243,6 @@ body {
 #otrosProductos {
   width: 650px; }
 
-.arrowProducto {
-  width: auto;
-  display: flex;
-  align-items: center; }
-
 .btnRadioMoneda {
   width: 80px; }
 
@@ -307,6 +302,19 @@ input:checked + .slider .dolares {
 
 .textCostoEnvio {
   font-size: 1.5rem; }
+
+.trashCarrito {
+  width: auto;
+  position: absolute;
+  left: 260px; }
+
+.btn-primary {
+  background-color: #dd8d8d;
+  border-color: #F97C7C; }
+
+.btn-primary:hover {
+  background-color: #F97C7C;
+  border-color: #F97C7C; }
 
 .carrito {
   /*.prodCarrito {

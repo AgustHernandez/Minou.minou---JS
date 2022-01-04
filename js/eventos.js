@@ -357,7 +357,7 @@ function productosModal(productosStorage) {
                     <p class="card-text fs-4">$ ${(productoCarrito.precio / obtenerCotizacion()).toFixed(2)}</p>
                     <p class="card-text fs-4" id="textoCantidad${indice}">Cantidad: ${productoCarrito.cant}</p>
                 </div>
-                <div class="row">
+                <div class="row position-relative">
                     <div>
                         <button class= "btn btn-outline-secondary" id="sum${productoCarrito.code}"><i class="fas fa-plus"></i></button>
                         <button class= "btn btn-outline-secondary" id="rest${productoCarrito.code}"><i class="fas fa-minus"></i></button> 
