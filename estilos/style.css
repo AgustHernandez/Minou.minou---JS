@@ -293,6 +293,21 @@ input:checked + .slider .pesos {
 input:checked + .slider .dolares {
   display: none; }
 
+.costoEnvios {
+  height: auto;
+  width: 350px;
+  padding: 0px 0px 10px 20px; }
+
+.precioCostoEnvio {
+  position: absolute;
+  width: 80px;
+  font-weight: 700;
+  left: 260px;
+  top: 0px; }
+
+.textCostoEnvio {
+  font-size: 1.5rem; }
+
 .carrito {
   /*.prodCarrito {
         @include desktop {
