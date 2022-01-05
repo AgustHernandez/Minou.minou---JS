@@ -89,6 +89,7 @@ if(window.location.href.includes("carritoCompra.html"))
 {
     actualizarPagina()
     eventosFinalizarCompra()
+    badgeCarrito ()
 }
 
 function selectMoneda() {

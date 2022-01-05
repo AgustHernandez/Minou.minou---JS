@@ -374,7 +374,7 @@ input:checked + .slider .dolares {
 
 .carrito .envios {
   height: 120px;
-  width: 365px;
+  width: 400px;
   padding-left: 20px;
   box-sizing: border-box;
   border: 1px solid black;
@@ -389,7 +389,7 @@ input:checked + .slider .dolares {
       width: 180px;
       padding-left: 10px; }
     .carrito .envios .listEnvios .precioEnvio {
-      width: 80px;
+      width: 100px;
       font-weight: 700;
       left: 260px;
       top: 5px; }
@@ -406,6 +406,12 @@ input:checked + .slider .dolares {
   .carrito .mediosDePago .listPagos {
     margin-right: 0px;
     margin: 10px 0px 10px 0px; }
+    .carrito .mediosDePago .listPagos .form-check-input {
+      width: 1.5rem;
+      height: 1.5rem; }
+    .carrito .mediosDePago .listPagos .form-check-label {
+      width: 180px;
+      padding-left: 10px; }
     .carrito .mediosDePago .listPagos .iconosPagos {
       width: 80px;
       font-weight: 700;
@@ -425,8 +431,13 @@ input:checked + .slider .dolares {
     width: auto;
     height: 50px; }
 
+.carrito .articleTotal {
+  display: flex;
+  flex-direction: column;
+  height: 120px; }
+
 .carrito .containerTotal {
-  width: 1020px;
+  width: 550px;
   display: flex;
   flex-direction: column;
   justify-content: end;

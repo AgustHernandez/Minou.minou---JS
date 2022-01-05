@@ -5,6 +5,10 @@ function badgeCarrito () {
     }else{
         document.getElementById("cantCarrito").innerHTML = ""
     }
+    let productosDelStorage = JSON.parse(localStorage.getItem('carrito'))
+    productosModal(productosDelStorage)
+    eventosModal(productosDelStorage)
+    compraTotal(productosDelStorage)
 }
 
 badgeCarrito ()
@@ -284,7 +288,24 @@ function actualizarPagina() {
         document.getElementById("precioEntrega72").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)
         document.getElementById("carritoCompraSubtotal").innerHTML = obtenerSimbolo() + " " + totalCarrito.toFixed(2)
         document.getElementById("carritoCompraCostoEnvio").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)    
-        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,72)).toFixed(2) 
+        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,72)).toFixed(2)
+        document.getElementById("resumenCompra").innerHTML = ""
+        let index = 1
+        carrito.productos.forEach(producto => {
+            document.getElementById("resumenCompra").innerHTML += `
+                <div class="listProductos position-relative">
+                    <h4 class="fs-5"><b>${producto.nombre}</b><br>${producto.cant}</h4>
+                    <div class="precioProdFinalizar">
+                        <p class="textPrecioProd">${obtenerSimbolo()} ${producto.valor * producto.cant}</p>
+                    </div>
+                </div>
+            `
+        if (index <= carrito.productos.length -1) {
+            document.getElementById("resumenCompra").innerHTML += "<hr>"      
+        }
+        
+        index++
+        })
     }
 }
 
@@ -310,6 +331,12 @@ function eventosModal(productosStorage) {
 
     productosStorage.forEach((productoCarrito, indice) => {
         document.getElementById(`botonEliminar${indice}`).addEventListener('click', () => {
+            let lSCarrito = JSON.parse(localStorage.getItem('carrito'))
+            if(lSCarrito == undefined)
+            {
+                lSCarrito = []
+            }
+            let productos = lSCarrito;
             document.getElementById(`productoCarrito${indice}`).remove()
             productos.splice(indice, 1)
             localStorage.setItem('carrito', JSON.stringify(productos))
@@ -359,10 +386,18 @@ function productosModal(productosStorage) {
                 </div>
                 <div class="row position-relative">
                     <div>
-                        <button class= "btn btn-outline-secondary" id="sum${productoCarrito.code}"><i class="fas fa-plus"></i></button>
-                        <button class= "btn btn-outline-secondary" id="rest${productoCarrito.code}"><i class="fas fa-minus"></i></button> 
+                        <button class= "btn" id="sum${productoCarrito.code}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></button>
+                        <button class= "btn" id="rest${productoCarrito.code}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                      </svg></button> 
                     </div>
-                    <button class= "btn btn-danger trashCarrito" id="botonEliminar${indice}"><i class="fas fa-trash-alt"></i></button>
+                    <button class= "btn btn-danger trashCarrito" id="botonEliminar${indice}"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                  </svg></button>
                 </div>
             </div>
         </div>
@@ -390,7 +425,7 @@ function eventosFinalizarCompra()
         document.getElementById("Entrega72").checked = true
         document.getElementById("Entrega24").checked = false
         document.getElementById("carritoCompraCostoEnvio").innerHTML = obtenerSimbolo() + " " + costoEnvio(totalCarrito,document.getElementById("provincia").value,72).toFixed(2)   
-        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,24)).toFixed(2) 
+        document.getElementById("carritoCompraTotal").innerHTML = obtenerSimbolo() + " " + (totalCarrito + costoEnvio(totalCarrito,document.getElementById("provincia").value,72)).toFixed(2) 
     })
 
     document.getElementById("provincia").addEventListener('change',()=>{

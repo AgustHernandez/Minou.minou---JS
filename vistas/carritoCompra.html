@@ -56,6 +56,26 @@
         <section class="container-lg">
             <h2 class="display-4 m-5 text-center">FINALIZAR COMPRA</h2>
             <section class="row align-items-center justify-content-center mt-5 carrito position-relative">
+                <div class="modal fade" id="carritoActual" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title fs-3" id="exampleModalLabel">Carrito de Compra</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                          
+                        </div>
+                        <div class="row ml-ato">
+                          <p class="fs-5" id="precioTotal"></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                          <a href="./carritoCompra.html"><button type="button" data-bs-dismiss="modal" class="btn btn-primary fs-5" id="botonFinalizarCompra">Finalizar Compra</button></a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
                 <article class="col-lg-12 col-md-6 col-sm-6 mt-5 articleEnvio">
                     <h3>Datos de Envío</h3>
                     <div class="mt-5 formEnvio">
@@ -104,24 +124,12 @@
                     </div>
                 </article>
                 <article class="col-lg-4 col-md-6 col-sm-6 articleProductos">
-                    <div class="col-lg-12 productos">
-                        <div class="listProductos position-relative">
-                            <h4 class="fs-5"><b>Producto</b><br>1</h4>
-                            <div class="precioProdFinalizar">
-                                <p class="textPrecioProd">$ 0</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="listProductos position-relative">
-                            <h4 class="fs-5"><b>Producto</b><br>1</h4></h4>
-                            <div class="precioProdFinalizar">
-                                <p class="textPrecioProd">$ 0</p>
-                            </div>
-                        </div>
+                    <div id="resumenCompra" class="col-lg-12 productos">
+                        
                     </div>
                 </article>
                 <article class="col-lg-12 col-md-6 col-sm-6 mt-3 articleEnvio">
-                    <div class="row envio item4">
+                    <div class="row envio">
                         <div class="col-lg-2 imgCamion">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="25" height="25"><path d="M624 368h-16V251.9c0-19-7.7-37.5-21.1-50.9L503 117.1C489.6 103.7 471 96 452.1 96H416V56c0-30.9-25.1-56-56-56H56C25.1 0 0 25.1 0 56v304c0 30.9 25.1 56 56 56h8c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm-464 96c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm208-96H242.7c-16.6-28.6-47.2-48-82.7-48s-66.1 19.4-82.7 48H56c-4.4 0-8-3.6-8-8V56c0-4.4 3.6-8 8-8h304c4.4 0 8 3.6 8 8v312zm48-224h36.1c6.3 0 12.5 2.6 17 7l73 73H416v-80zm64 320c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-100.9c-17.2-25.9-46.6-43.1-80-43.1-24.7 0-47 9.6-64 24.9V272h144v91.1z"></path></svg>
                         </div>
@@ -147,70 +155,94 @@
                         </div>
                     </div>
                 </article>
-                <article class="col-lg-12 col-md-6 col-sm-6 mt-3">
-                    <div class="row listPagos">
-                        <div class="col-lg-2 imgTarjeta">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
-                                <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
-                            </svg>
-                        </div>
-                        <div class="col-lg-9 textDomicilio mb-5">
-                            <h4>Medios de Pago</h4>
-                        </div>
-                        <div class="col-lg-12 mediosDePago">
-                            <div class="listPagos position-relative habilitado">
-                                <input type="radio" class="form-check-input" id="efectivo" placeholder="Entrega72">
-                                <label for="efectivo" class="form-check-label fs-4 mx-3"><b>Efectivo</b></label>
-                                <div class="iconosPagos position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
-                                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                                        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
-                                      </svg>
+                <article class="row align-items-center">
+                    <article class="col-lg-6 col-md-6 col-sm-6 mt-3">
+                        <div class="row listPagos">
+                            <div class="col-lg-2 imgTarjeta">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                    <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                </svg>
+                            </div>
+                            <div class="col-lg-9 textDomicilio mb-5">
+                                <h4>Medios de Pago</h4>
+                            </div>
+                            <div class="col-lg-12 mediosDePago">
+                                <div class="listPagos position-relative habilitado">
+                                    <input type="radio" class="form-check-input" id="efectivo" name="efectivo" checked>
+                                    <label for="efectivo" class="form-check-label fs-4 mx-3"><b>Efectivo</b></label>
+                                    <div class="iconosPagos position-absolute">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                            <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                            <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="listPagos position-relative anulado">
+                                    <input type="radio" class="form-check-input" id="tarjetas" name="tarjetas" disabled>
+                                    <label for="tarjetas" class="form-check-label fs-4 mx-3"><b>Tarjeta de debito/credito</b></label>
+                                    <div class="iconosPagos position-absolute">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="listPagos position-relative anulado">
+                                    <input type="radio" class="form-check-input" id="mercadoPago" name="mercadoPago" disabled>
+                                    <label for="mercadoPago" class="form-check-label fs-4 mx-3"><b>Mercado Pago</b></label>
+                                    <div class="iconosPagosMP position-absolute">
+                                        <img class="MP" src="../assets/mercadoPago.png" alt="logo Mercado Pago">
+                                    </div>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="listPagos position-relative anulado">
-                                <input type="radio" class="form-check-input" id="tarjetas" placeholder="tarjetas">
-                                <label for="tarjetas" class="form-check-label fs-4 mx-3"><b>Tarjeta de debito/credito</b></label>
-                                <div class="iconosPagos position-absolute">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
-                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
-                                        <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
-                                      </svg>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="listPagos position-relative anulado">
-                                <input type="radio" class="form-check-input" id="mercadoPago" placeholder="mercadoPago">
-                                <label for="mercadoPago" class="form-check-label fs-4 mx-3"><b>Mercado Pago</b></label>
-                                <div class="iconosPagosMP position-absolute">
-                                    <img class="MP" src="../assets/mercadoPago.png" alt="logo Mercado Pago">
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </article>
-                <article class="col-lg-4 col-md-6 col-sm-6 containerTotal">
-                    <div class="text-center textTotal">
-                        <h4 class="fs-3 px-5">Subtotal</h4>
-                        <p id="carritoCompraSubtotal">$ 0</p>
-                    </div>
-                </article>
-                <article class="col-lg-4 col-md-6 col-sm-6 containerTotal">
-                    <div class="text-center textTotal">
-                        <h4 class="fs-3 px-5">Costo Envío</h4>
-                        <p id="carritoCompraCostoEnvio">$ 0</p>
-                    </div>
-                </article>
-                <article class="col-lg-4 col-md-6 col-sm-6 containerTotal">
-                    <div class="text-center textTotal">
-                        <h4 class="total">TOTAL</h4>
-                        <p id="carritoCompraTotal">$ 0</p>
-                    </div>
+                    </article>
+                    <article class="col-lg-6 col-md-6 col-sm-6 mt-3 articleTotal">
+                        <article class="col-lg-4 col-md-6 col-sm-6 containerTotal">
+                            <div class="text-center textTotal">
+                                <h4 class="fs-3 px-5">Subtotal</h4>
+                                <p id="carritoCompraSubtotal">$ 0</p>
+                            </div>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 containerTotal">
+                            <div class="text-center textTotal">
+                                <h4 class="fs-3 px-5">Costo Envío</h4>
+                                <p id="carritoCompraCostoEnvio">$ 0</p>
+                            </div>
+                        </article>
+                        <article class="col-lg-4 col-md-6 col-sm-6 containerTotal">
+                            <div class="text-center textTotal">
+                                <h4 class="total">TOTAL</h4>
+                                <p id="carritoCompraTotal">$ 0</p>
+                            </div>
+                        </article>
+                    </article>
                 </article>
                 <div class="text-center containerBtnCarrito">
-                    <button type="button" class="btn btnCarrito btn-lg item6" id="btnCompra">Comprar</button>
+                    <button type="button" class="btn btnCarrito btn-lg item6" id="btnCompra" data-bs-toggle="modal" data-bs-target="#finalizarCompra">Comprar</button>
+                    <div class="modal fade" id="finalizarCompra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title fs-3" id="exampleModalLabel">Compra realizada</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modal-body-fin-Compra">
+                                <h4 class="fs-4">Felicitaciones ! Realizaste una compra en Minou.Minou</h4>
+                                <p class="fs-5">El detalle de la compra te llegará a tu correo</p>
+                            </div>
+                            <div class="row ml-ato">
+                              <p class="fs-5" id="precioTotal"></p>
+                            </div>
+                            <div class="modal-footer">
+                              <a href="../index.html"><button type="button" class="btn btn-primary fs-5" data-bs-dismiss="modal">Cerrar</button></a>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </section>

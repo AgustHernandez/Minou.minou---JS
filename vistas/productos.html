@@ -52,6 +52,26 @@
         </nav>
     </header>
     <main>
+        <div class="modal fade" id="carritoActual" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-3" id="exampleModalLabel">Carrito de Compra</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                  
+                </div>
+                <div class="row ml-ato">
+                  <p class="fs-5" id="precioTotal"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <a href="./carritoCompra.html"><button type="button" data-bs-dismiss="modal" class="btn btn-primary fs-5" id="botonFinalizarCompra">Finalizar Compra</button></a>
+                </div>
+              </div>
+            </div>
+        </div>
         <section class="container">
             <h2 class="display-3 m-5 text-center">PRODUCTOS</h2>
             <article class="row cardsProductos justify-content-center mt-5 mb-5 img-fluid" id="sectionProductos"></article>

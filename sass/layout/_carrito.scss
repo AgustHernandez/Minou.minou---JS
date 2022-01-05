@@ -66,7 +66,7 @@
 
     .envios {
         height: 120px;
-        width: 365px;
+        width: 400px;
         padding-left: 20px;
         box-sizing: border-box;
         border: 1px solid black;
@@ -83,7 +83,7 @@
                 padding-left: 10px;
             }
             .precioEnvio {
-                width: 80px;
+                width: 100px;
                 font-weight: 700;
                 left: 260px;
                 top: 5px;
@@ -103,6 +103,14 @@
         .listPagos {
             margin-right: 0px;
             margin: 10px 0px 10px 0px;
+            .form-check-input {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            .form-check-label {
+                width: 180px;
+                padding-left: 10px;
+            }
             .iconosPagos {
                 width: 80px;
                 font-weight: 700;
@@ -128,8 +136,13 @@
             height: 50px;
         }
     }
+    .articleTotal {
+        display: flex;
+        flex-direction: column;
+        height: 120px;
+    }
     .containerTotal {
-        width: 1020px;
+        width: 550px;
         display: flex;
         flex-direction: column;
         justify-content: end;
