@@ -16,21 +16,48 @@
             width: 45rem;
         }
     }
-    /*.prodCarrito {
-        @include desktop {
-            height: 320px;
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }*/
 
     .articleEnvio {
         height: 190px;
         justify-content: start;
         align-content: center;
     }
+    .formEnvio {
+        width: 750px;
+    }
+
+    .articleProductos {
+        position: absolute;
+        left: 870px;
+        top:100px;
+        .productos {
+            height: auto;
+            width: 400px;
+            padding-left: 20px;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: 20px;
+            .listProductos {
+                margin-right: 0px;
+                margin: 10px 0px 10px 0px;
+                .precioProdFinalizar {
+                    position: absolute; 
+                    width: 80px;
+                    font-weight: 700;
+                    left: 260px;
+                    top: 5px;
+                    .textPrecioProd {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
 
     .imgCamion {
+        width: 40px;
+    }
+    .imgTarjeta {
         width: 40px;
     }
     .textDomicilio {
@@ -39,7 +66,7 @@
 
     .envios {
         height: 120px;
-        width: 350px;
+        width: 365px;
         padding-left: 20px;
         box-sizing: border-box;
         border: 1px solid black;
@@ -64,6 +91,41 @@
                     font-size: 1.8rem;
                 }
             }
+        }
+    }
+    .mediosDePago {
+        height: 210px;
+        width: 365px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 20px;
+        .listPagos {
+            margin-right: 0px;
+            margin: 10px 0px 10px 0px;
+            .iconosPagos {
+                width: 80px;
+                font-weight: 700;
+                left: 245px;
+                top: 5px;
+            }
+            .iconosPagosMP {
+                left: 200px;
+                top: 8px;
+                .MP {
+                    width: 120px;
+                    height: 35px;
+                }
+            }
+        }
+        .habilitado {
+            width: auto;
+            height: 40px; 
+        }
+        .anulado {
+            background-color: rgba(116, 113, 113, 0.596);
+            width: auto;
+            height: 50px;
         }
     }
     .containerTotal {

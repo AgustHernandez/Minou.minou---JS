@@ -55,10 +55,10 @@
     <main>
         <section class="container-lg">
             <h2 class="display-4 m-5 text-center">FINALIZAR COMPRA</h2>
-            <section class="row align-items-center justify-content-center mt-5 carrito">
-                <article class="col-lg-12 col-md-6 col-sm-6 mt-5 articleEnvio datosEnvio item3">
+            <section class="row align-items-center justify-content-center mt-5 carrito position-relative">
+                <article class="col-lg-12 col-md-6 col-sm-6 mt-5 articleEnvio">
                     <h3>Datos de Envío</h3>
-                    <div class="mt-5">
+                    <div class="mt-5 formEnvio">
                         <form class="row g-3" action="#" method="#">
                             <div class="col-md-4 mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
@@ -103,6 +103,23 @@
                         </form>
                     </div>
                 </article>
+                <article class="col-lg-4 col-md-6 col-sm-6 articleProductos">
+                    <div class="col-lg-12 productos">
+                        <div class="listProductos position-relative">
+                            <h4 class="fs-5"><b>Producto</b><br>1</h4>
+                            <div class="precioProdFinalizar">
+                                <p class="textPrecioProd">$ 0</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="listProductos position-relative">
+                            <h4 class="fs-5"><b>Producto</b><br>1</h4></h4>
+                            <div class="precioProdFinalizar">
+                                <p class="textPrecioProd">$ 0</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
                 <article class="col-lg-12 col-md-6 col-sm-6 mt-3 articleEnvio">
                     <div class="row envio item4">
                         <div class="col-lg-2 imgCamion">
@@ -130,31 +147,45 @@
                         </div>
                     </div>
                 </article>
-                <article class="col-lg-12 col-md-6 col-sm-6 mt-3 articleEnvio">
-                    <div class="row envio item4">
-                        <div class="col-lg-2 imgCamion">
+                <article class="col-lg-12 col-md-6 col-sm-6 mt-3">
+                    <div class="row listPagos">
+                        <div class="col-lg-2 imgTarjeta">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
                                 <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
                             </svg>
                         </div>
                         <div class="col-lg-9 textDomicilio mb-5">
-                            <h4>Envío a Domicilio</h4>
+                            <h4>Medios de Pago</h4>
                         </div>
-                        <div class="col-lg-12 envios">
-                            <div class="listEnvios position-relative">
-                                <input type="radio" class="form-check-input" id="Entrega72" placeholder="Entrega72">
-                                <label for="Entrega72" class="form-check-label fs-5"><b> Entrega en 72 hs.</b><br>Llega entre 1 y 3 días hábiles</label>
-                                <div class="precioEnvio position-absolute">
-                                    <p  class="textPrecio">$ 0</p>
+                        <div class="col-lg-12 mediosDePago">
+                            <div class="listPagos position-relative habilitado">
+                                <input type="radio" class="form-check-input" id="efectivo" placeholder="Entrega72">
+                                <label for="efectivo" class="form-check-label fs-4 mx-3"><b>Efectivo</b></label>
+                                <div class="iconosPagos position-absolute">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cash" viewBox="0 0 16 16">
+                                        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"/>
+                                      </svg>
                                 </div>
                             </div>
                             <hr>
-                            <div class="listEnvios position-relative">
-                                <input type="radio" class="form-check-input" id="Entrega24" placeholder="Entrega24">
-                                <label for="Entrega24" class="form-check-label fs-5"><b> Entrega en 24 hs.</b><br>Llega entre hoy y 1 días hábil</label>
-                                <div class="precioEnvio position-absolute">
-                                    <p  class="textPrecio">$ 0</p>
+                            <div class="listPagos position-relative anulado">
+                                <input type="radio" class="form-check-input" id="tarjetas" placeholder="tarjetas">
+                                <label for="tarjetas" class="form-check-label fs-4 mx-3"><b>Tarjeta de debito/credito</b></label>
+                                <div class="iconosPagos position-absolute">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                        <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                      </svg>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="listPagos position-relative anulado">
+                                <input type="radio" class="form-check-input" id="mercadoPago" placeholder="mercadoPago">
+                                <label for="mercadoPago" class="form-check-label fs-4 mx-3"><b>Mercado Pago</b></label>
+                                <div class="iconosPagosMP position-absolute">
+                                    <img class="MP" src="../assets/mercadoPago.png" alt="logo Mercado Pago">
                                 </div>
                             </div>
                         </div>

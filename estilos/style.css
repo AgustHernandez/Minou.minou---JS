@@ -316,95 +316,155 @@ input:checked + .slider .dolares {
   background-color: #F97C7C;
   border-color: #F97C7C; }
 
-.carrito {
-  /*.prodCarrito {
-        @include desktop {
-            height: 320px;
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }*/ }
-  @media screen and (min-width: 768px) {
-    .carrito {
-      height: 50rem;
-      padding-left: 0;
-      padding-right: 0; } }
-  @media screen and (min-width: 1024px) {
-    .carrito {
-      height: 110rem;
-      padding-left: 0;
-      padding-right: 0; } }
-  @media screen and (min-width: 1024px) {
-    .carrito .col-lg-4 {
-      width: 45rem; } }
-  .carrito .articleEnvio {
-    height: 190px;
-    justify-content: start;
-    align-content: center; }
-  .carrito .imgCamion {
-    width: 40px; }
-  .carrito .textDomicilio {
-    vertical-align: auto; }
-  .carrito .envios {
-    height: 120px;
-    width: 350px;
+@media screen and (min-width: 768px) {
+  .carrito {
+    height: 50rem;
+    padding-left: 0;
+    padding-right: 0; } }
+
+@media screen and (min-width: 1024px) {
+  .carrito {
+    height: 110rem;
+    padding-left: 0;
+    padding-right: 0; } }
+
+@media screen and (min-width: 1024px) {
+  .carrito .col-lg-4 {
+    width: 45rem; } }
+
+.carrito .articleEnvio {
+  height: 190px;
+  justify-content: start;
+  align-content: center; }
+
+.carrito .formEnvio {
+  width: 750px; }
+
+.carrito .articleProductos {
+  position: absolute;
+  left: 870px;
+  top: 100px; }
+  .carrito .articleProductos .productos {
+    height: auto;
+    width: 400px;
     padding-left: 20px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 20px; }
-    .carrito .envios .listEnvios {
+    .carrito .articleProductos .productos .listProductos {
       margin-right: 0px;
       margin: 10px 0px 10px 0px; }
-      .carrito .envios .listEnvios .form-check-input {
-        width: 1.5rem;
-        height: 1.5rem; }
-      .carrito .envios .listEnvios .form-check-label {
-        width: 180px;
-        padding-left: 10px; }
-      .carrito .envios .listEnvios .precioEnvio {
+      .carrito .articleProductos .productos .listProductos .precioProdFinalizar {
+        position: absolute;
         width: 80px;
         font-weight: 700;
         left: 260px;
         top: 5px; }
-        .carrito .envios .listEnvios .precioEnvio .textPrecio {
-          font-size: 1.8rem; }
-  .carrito .containerTotal {
-    width: 1020px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: flex-end; }
-  .carrito .textTotal {
+        .carrito .articleProductos .productos .listProductos .precioProdFinalizar .textPrecioProd {
+          font-size: 1.5rem; }
+
+.carrito .imgCamion {
+  width: 40px; }
+
+.carrito .imgTarjeta {
+  width: 40px; }
+
+.carrito .textDomicilio {
+  vertical-align: auto; }
+
+.carrito .envios {
+  height: 120px;
+  width: 365px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 20px; }
+  .carrito .envios .listEnvios {
+    margin-right: 0px;
+    margin: 10px 0px 10px 0px; }
+    .carrito .envios .listEnvios .form-check-input {
+      width: 1.5rem;
+      height: 1.5rem; }
+    .carrito .envios .listEnvios .form-check-label {
+      width: 180px;
+      padding-left: 10px; }
+    .carrito .envios .listEnvios .precioEnvio {
+      width: 80px;
+      font-weight: 700;
+      left: 260px;
+      top: 5px; }
+      .carrito .envios .listEnvios .precioEnvio .textPrecio {
+        font-size: 1.8rem; }
+
+.carrito .mediosDePago {
+  height: 210px;
+  width: 365px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 20px; }
+  .carrito .mediosDePago .listPagos {
+    margin-right: 0px;
+    margin: 10px 0px 10px 0px; }
+    .carrito .mediosDePago .listPagos .iconosPagos {
+      width: 80px;
+      font-weight: 700;
+      left: 245px;
+      top: 5px; }
+    .carrito .mediosDePago .listPagos .iconosPagosMP {
+      left: 200px;
+      top: 8px; }
+      .carrito .mediosDePago .listPagos .iconosPagosMP .MP {
+        width: 120px;
+        height: 35px; }
+  .carrito .mediosDePago .habilitado {
+    width: auto;
+    height: 40px; }
+  .carrito .mediosDePago .anulado {
+    background-color: rgba(116, 113, 113, 0.596);
+    width: auto;
+    height: 50px; }
+
+.carrito .containerTotal {
+  width: 1020px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: flex-end; }
+
+.carrito .textTotal {
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center; }
+  .carrito .textTotal .total {
     font-size: 2rem;
     font-weight: 700;
-    display: flex;
-    align-items: center; }
-    .carrito .textTotal .total {
-      font-size: 2rem;
-      font-weight: 700;
-      padding-right: 20px; }
-  .carrito .containerBtnCarrito {
-    width: 1200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: flex-end; }
-    .carrito .containerBtnCarrito .btnCarrito {
-      width: 100px;
-      background-color: #F97C7C;
-      border-radius: 44px;
-      color: white;
-      font-size: 1.5rem;
-      transition: all 1s; }
-      @media screen and (min-width: 768px) {
-        .carrito .containerBtnCarrito .btnCarrito {
-          width: 30rem; } }
-      .carrito .containerBtnCarrito .btnCarrito:hover {
-        transform: scale(1.1); }
-  .carrito .linkBoton {
-    text-decoration: none;
+    padding-right: 20px; }
+
+.carrito .containerBtnCarrito {
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: flex-end; }
+  .carrito .containerBtnCarrito .btnCarrito {
+    width: 100px;
+    background-color: #F97C7C;
+    border-radius: 44px;
     color: white;
-    font-size: 1.5rem; }
+    font-size: 1.5rem;
+    transition: all 1s; }
+    @media screen and (min-width: 768px) {
+      .carrito .containerBtnCarrito .btnCarrito {
+        width: 30rem; } }
+    .carrito .containerBtnCarrito .btnCarrito:hover {
+      transform: scale(1.1); }
+
+.carrito .linkBoton {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem; }
 
 .piePag {
   background-image: linear-gradient(to right, #BF846F, #8C5346); }
